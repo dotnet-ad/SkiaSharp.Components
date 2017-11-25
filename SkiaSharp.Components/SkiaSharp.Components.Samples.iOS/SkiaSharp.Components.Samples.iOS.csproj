@@ -124,6 +124,10 @@
       <Project>{D1F6B791-43FA-4590-A55A-BC6362C298C1}</Project>
       <Name>SkiaSharp.Components.Samples</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SkiaSharp.Components.Layout\SkiaSharp.Components.Layout.csproj">
+      <Project>{9F3010ED-6659-44BC-8CB3-15298DE9EEC8}</Project>
+      <Name>SkiaSharp.Components.Layout</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

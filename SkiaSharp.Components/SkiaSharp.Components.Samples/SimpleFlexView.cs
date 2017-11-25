@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using SkiaSharp.Components.Layout;
+
 namespace SkiaSharp.Components.Samples
 {
     public class SimpleFlexView : FlexView

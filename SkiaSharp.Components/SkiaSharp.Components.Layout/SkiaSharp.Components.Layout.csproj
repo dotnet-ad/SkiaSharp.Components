@@ -1,17 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SkiaSharp.Components\SkiaSharp.Components.csproj" />
-    <ProjectReference Include="..\SkiaSharp.Components.Layout\SkiaSharp.Components.Layout.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Flex\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Facebook.Yoga" Version="1.5.0-pre1" />
+    <PackageReference Include="SkiaSharp" Version="1.59.2" />
   </ItemGroup>
 </Project>

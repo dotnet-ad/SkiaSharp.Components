@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Facebook.Yoga;
 
-namespace SkiaSharp.Components.Samples
+namespace SkiaSharp.Components.Layout
 {
     public class Layout : YogaNode
     {
