@@ -15,8 +15,7 @@
      <tags>skia, skiasharp, ui, components</tags>
       <dependencies>
         <group>
-            <dependency id="SkiaSharp" version="1.59.2" />
-            <dependency id="SkiaSharp" version="1.5.0-pre1" />
+            <dependency id="Facebook.Yoga" version="1.5.0-pre1" />
             <dependency id="SkiaSharp.Components" version="$version$" />
         </group>
     </dependencies>
