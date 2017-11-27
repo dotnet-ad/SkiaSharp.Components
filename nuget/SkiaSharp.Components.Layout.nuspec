@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+   <metadata minClientVersion="2.8.1">
+       <id>SkiaSharp.Components.Layout</id>
+       <version>$version$-pre</version>
+       <title>SkiaSharp.Components.Layout</title>
+       <authors>Aloïs Deniel</authors>
+       <owners>Aloïs Deniel</owners>
+     <licenseUrl>https://github.com/aloisdeniel/SkiaSharp.Components/blob/master/LICENSE</licenseUrl>
+     <projectUrl>https://github.com/aloisdeniel/SkiaSharp.Components</projectUrl>
+     <iconUrl>https://raw.githubusercontent.com/aloisdeniel/SkiaSharp.Components/master/Documentation/Logo.png</iconUrl>
+       <requireLicenseAcceptance>false</requireLicenseAcceptance>
+       <description>Producing rendering code for SkiaSharp can be extremely verbose and repetitive. SkiaSharp.Components are higher level view that makes declarations more concise with components..</description>
+       <summary>Producing rendering code for SkiaSharp can be extremely verbose and repetitive. SkiaSharp.Components are higher level view that makes declarations more concise with components..</summary>
+     <tags>skia, skiasharp, ui, components</tags>
+      <dependencies>
+        <group>
+            <dependency id="SkiaSharp" version="1.59.2" />
+            <dependency id="SkiaSharp" version="1.5.0-pre1" />
+            <dependency id="SkiaSharp.Components" version="$version$" />
+        </group>
+    </dependencies>
+   </metadata>
+   <files>
+     <file src="..\src\SkiaSharp.Components.Layout\bin\Release\SkiaSharp.Components.Layout.dll" target="lib\netstandard1.3\SkiaSharp.Components.Layout.dll" />
+   </files>
+</package>
