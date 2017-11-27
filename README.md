@@ -63,7 +63,7 @@ Each time a property of a view changes, the `Invalidated` event of a view is rai
 
 ### Layout
 
-A package containing layout helpers is available from `SkiaSharp.Components.Layout`. It's combine the power of [SkiaSharp](https://github.com/mono/SkiaSharp) and [Yoga](https://github.com/facebook/Yoga) (and maybe [Xamarin.Flex](https://github.com/Xamarin/flex) soon).
+A package containing layout helpers is available from `SkiaSharp.Components.Layout`. It combines the power of [SkiaSharp](https://github.com/mono/SkiaSharp) and [Yoga](https://github.com/facebook/Yoga) (and maybe [Xamarin.Flex](https://github.com/Xamarin/flex) soon).
 
 See the [sample](/src/SkiaSharp.Components.Samples/SimpleFlexView.cs) for more details.
 
