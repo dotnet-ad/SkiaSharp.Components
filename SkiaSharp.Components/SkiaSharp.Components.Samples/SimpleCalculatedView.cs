@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SkiaSharp.Components.Samples
+﻿namespace SkiaSharp.Components.Samples
 {
     public class SimpleCalculatedView : SimpleView
     {

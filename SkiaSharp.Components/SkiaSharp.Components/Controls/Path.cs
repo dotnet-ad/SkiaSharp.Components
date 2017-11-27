@@ -11,11 +11,23 @@
 
         private SKPath source;
 
+        private SKRect? viewbox;
+
+        private SKStrokeCap strokeCap = SKStrokeCap.Round;
+
         private float strokeSize;
 
-        private SKColor foregroundColor = SKColors.Black;
+        private SKColor strokeColor = SKColors.Black;
+
+        private SKColor fillColor = SKColors.Transparent;
 
         #endregion
+
+        public SKRect? ViewBox
+        {
+            get => this.viewbox;
+            set => this.SetAndInvalidate(ref this.viewbox, value);
+        }
 
         public SKPath Source
         {
@@ -23,10 +35,22 @@
             set => this.SetAndInvalidate(ref this.source, value);
         }
 
-        public SKColor ForegroundColor
+        public SKStrokeCap StrokeCap
         {
-            get => this.foregroundColor;
-            set => this.SetAndInvalidate(ref this.foregroundColor, value);
+            get => this.strokeCap;
+            set => this.SetAndInvalidate(ref this.strokeCap, value);
+        }
+
+        public SKColor StrokeColor
+        {
+            get => this.strokeColor;
+            set => this.SetAndInvalidate(ref this.strokeColor, value);
+        }
+
+        public SKColor FillColor
+        {
+            get => this.fillColor;
+            set => this.SetAndInvalidate(ref this.fillColor, value);
         }
 
         public float StrokeSize
@@ -41,25 +65,43 @@
         {
             base.Render(canvas, frame);
 
-            using(var paint = new SKPaint
+            var viewbox = this.viewbox ?? Source.Bounds;
+
+            var sx = frame.Width / viewbox.Width;
+            var sy = frame.Height / viewbox.Height;
+
+            var matrix = SKMatrix.MakeScale(sx, sy);
+            matrix.TransX = frame.Left - viewbox.Left * sx;
+            matrix.TransY = frame.Top - viewbox.Top * sy;
+            var path = new SKPath(this.Source);
+            path.Transform(matrix);
+
+            if (this.FillColor.Alpha > 0)
             {
-                IsAntialias = true,
-                Style = SKPaintStyle.Stroke,
-                Color = this.ForegroundColor,
-                StrokeWidth = this.StrokeSize,
-            })
+                using (var paint = new SKPaint
+                {
+                    IsAntialias = true,
+                    Style = SKPaintStyle.Fill,
+                    Color = this.FillColor,
+                })
+                {
+                    canvas.DrawPath(path, paint);
+                }
+            }
+
+            if(this.StrokeSize > 0)
             {
-                var sx = frame.Width / Source.Bounds.Width;
-                var sy = frame.Height / Source.Bounds.Height;
-
-                var matrix = SKMatrix.MakeScale(sx,sy);
-                matrix.TransX = frame.Left;
-                matrix.TransY = frame.Top;
-                var path = new SKPath(this.Source);
-                path.Transform(matrix);
-
-                canvas.DrawPath(path, paint);
-
+                using (var paint = new SKPaint
+                {
+                    IsAntialias = true,
+                    Style = SKPaintStyle.Stroke,
+                    Color = this.StrokeColor,
+                    StrokeWidth = this.StrokeSize,
+                    StrokeCap = this.StrokeCap
+                })
+                {
+                    canvas.DrawPath(path, paint);
+                }
             }
 
         }
