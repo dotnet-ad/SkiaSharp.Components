@@ -10,6 +10,8 @@
 
         public Image Image { get; }
 
+        public Path Icon { get; }
+
         public SimpleView()
         {
             this.BackgroundColor = SKColors.LightGray;
@@ -37,6 +39,13 @@
             this.Image = new Image
             {
                 Source = "https://www.xamarin.com/content/images/pages/branding/assets/xamagon.png",
+            };
+
+            this.Icon = new Path
+            {
+                Source = IconPath.ArrowUp,
+                StrokeSize = 5,
+                ViewBox = SKRect.Create(0, 0, 24, 24),
             };
         }
     }
