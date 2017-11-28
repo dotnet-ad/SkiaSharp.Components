@@ -9,7 +9,7 @@ namespace SkiaSharp.Components
     {
         #region Constants
 
-        public static readonly SKColor DefaultForegroundColor = SKColors.Black;
+        public static readonly IBrush DefaultForegroundBrush = new ColorBrush(SKColors.Black);
 
         public const float DefaultTextSize = 20;
 
@@ -23,7 +23,9 @@ namespace SkiaSharp.Components
 
         private float? lineHeight;
 
-        private SKColor foregroundColor = DefaultForegroundColor;
+        private IBrush foregroundBrush = DefaultForegroundBrush;
+
+        private SKTypeface typeface;
 
         #endregion
 
@@ -33,10 +35,16 @@ namespace SkiaSharp.Components
             set => this.SetAndInvalidate(ref this.text, value);
         }
 
-        public SKColor ForegroundColor
+        public IBrush ForegroundBrush
         {
-            get => this.foregroundColor;
-            set => this.SetAndInvalidate(ref this.foregroundColor, value);
+            get => this.foregroundBrush;
+            set => this.SetAndInvalidate(ref this.foregroundBrush, value);
+        }
+
+        public SKTypeface Typeface
+        {
+            get => this.typeface;
+            set => this.SetAndInvalidate(ref this.typeface, value);
         }
 
         public float TextSize
@@ -62,6 +70,7 @@ namespace SkiaSharp.Components
             {
                 TextSize = this.textSize,
             })
+            using(var brush = this.ForegroundBrush.Apply(paint))
             {
                 var spaceWidth = paint.MeasureText(" ");
 
@@ -121,6 +130,7 @@ namespace SkiaSharp.Components
             {
                 IsAntialias = true,
                 TextSize = this.textSize,
+                Typeface = typeface,
             })
             {
                 var lines = this.SplitLines(frame.Size);

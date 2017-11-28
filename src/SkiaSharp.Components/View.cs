@@ -10,7 +10,7 @@ namespace SkiaSharp.Components
 
         public static readonly SKColor DefaultShadowColor = SKColors.Black.WithAlpha(30);
 
-        public static readonly SKColor DefaultBorderColor = SKColors.Black;
+        public static readonly IBrush DefaultBorderBrush = new ColorBrush(SKColors.Black);
 
         public static readonly SKSize DefaultShadowSize = new SKSize(0,0);
 
@@ -22,11 +22,11 @@ namespace SkiaSharp.Components
 
         private bool isInvalidated;
 
-        private SKColor backgroundColor;
+        private IBrush backgroundBrush;
 
         private SKColor shadowColor = DefaultShadowColor;
 
-        private SKColor borderColor = DefaultBorderColor;
+        private IBrush borderBrush = DefaultBorderBrush;
 
         private float borderSize = 0;
 
@@ -93,16 +93,16 @@ namespace SkiaSharp.Components
             set => this.SetAndInvalidate(ref this.shadowOffset, value);
         }
 
-        public SKColor BackgroundColor
+        public IBrush BackgroundBrush
         {
-            get => this.backgroundColor;
-            set => this.SetAndInvalidate(ref this.backgroundColor, value);
+            get => this.backgroundBrush;
+            set => this.SetAndInvalidate(ref this.backgroundBrush, value);
         }
 
-        public SKColor BorderColor
+        public IBrush BorderBrush
         {
-            get => this.borderColor;
-            set => this.SetAndInvalidate(ref this.borderColor, value);
+            get => this.borderBrush;
+            set => this.SetAndInvalidate(ref this.borderBrush, value);
         }
 
         public float BorderSize
@@ -155,9 +155,9 @@ namespace SkiaSharp.Components
                 {
                     Style = SKPaintStyle.Stroke,
                     StrokeWidth = this.BorderSize,
-                    Color = this.BorderColor,
                     IsAntialias = true,
                 })
+                using(var brush = this.BorderBrush.Apply(paint))
                 {
                     canvas.DrawPath(roundedRect, paint);
                 }
@@ -187,13 +187,14 @@ namespace SkiaSharp.Components
 
         protected virtual void Render(SKCanvas canvas, SKRect frame)
         {
-            if (this.BackgroundColor.Alpha > 0)
+            if (this.BackgroundBrush != null)
             {
                 using (var paint = new SKPaint()
                 {
                     Style = SKPaintStyle.Fill,
-                    Color = this.BackgroundColor,
                 })
+
+                using(var brush = this.BackgroundBrush.Apply(paint))
                 {
                     if(this.CornerRadius > 0)
                     {

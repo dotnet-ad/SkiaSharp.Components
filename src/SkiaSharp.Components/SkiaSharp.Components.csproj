@@ -10,5 +10,6 @@
   <ItemGroup>
     <Folder Include="Controls\" />
     <Folder Include="Base\" />
+    <Folder Include="Brushes\" />
   </ItemGroup>
 </Project>
