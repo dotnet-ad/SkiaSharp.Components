@@ -16,6 +16,8 @@ namespace SkiaSharp.Components.Samples
 
         public Path Icon { get; }
 
+        public Tap Button { get; }
+
         public SimpleFlexView()
         {
             this.Root.Padding = 10;
@@ -88,7 +90,18 @@ namespace SkiaSharp.Components.Samples
                 MarginTop = 10,
             });
 
-            this.Update();
+            this.Button = this.AddView(new Layout<Tap>(new Tap()
+            {
+                BackgroundBrush = new ColorBrush(SKColors.DeepPink),
+                CornerRadius = 5,
+            })
+            {
+                Height = 100,
+            });
+
+            this.Button.Tapped += OnButtonTapped;
+            this.Button.Pressed += (s, e) => ((Tap)s).BackgroundBrush = new ColorBrush(SKColors.LightPink);
+            this.Button.Released += (s, e) => ((Tap)s).BackgroundBrush = new ColorBrush(SKColors.DeepPink);
         }
 
         private int currentIcon = 0;
@@ -97,15 +110,11 @@ namespace SkiaSharp.Components.Samples
 
         private SKPath[] iconPaths = typeof(IconPath).GetProperties().Select(x => (SKPath)x.GetValue(null)).ToArray();
 
-        private async void Update()
+        void OnButtonTapped(object sender, System.EventArgs e)
         {
-            for (int i = 0; i < 300; i++)
-            {
-                await Task.Delay(750);
-                currentIcon = (currentIcon + 1) % iconPaths.Length;
-                this.Description.Text += $" | {iconNames[currentIcon]}";
-                this.Icon.Source = iconPaths[currentIcon];
-            }
+            currentIcon = (currentIcon + 1) % iconPaths.Length;
+            this.Description.Text += $" | {iconNames[currentIcon]}";
+            this.Icon.Source = iconPaths[currentIcon];
         }
     }
 }

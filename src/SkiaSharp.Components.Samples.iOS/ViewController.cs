@@ -1,5 +1,5 @@
 ﻿using System;
-
+using SkiaSharp.Components.Layout.iOS;
 using UIKit;
 
 namespace SkiaSharp.Components.Samples.iOS
@@ -16,7 +16,7 @@ namespace SkiaSharp.Components.Samples.iOS
             base.ViewDidLoad();
 
             var view = new SimpleFlexView();
-            var renderer = new Renderer(view);
+            var renderer = new ViewRenderer(view);
             this.View = renderer;
         }
     }

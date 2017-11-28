@@ -131,7 +131,7 @@ namespace SkiaSharp.Components
                 TextSize = this.textSize,
                 Typeface = typeface,
             })
-            using (var brush = this.ForegroundBrush.Apply(paint, frame))
+            using (var brush = this.ForegroundBrush.Apply(canvas, paint, frame))
             {
                 var lines = this.SplitLines(frame.Size);
                 for (int i = 0; i < lines.Length; i++)

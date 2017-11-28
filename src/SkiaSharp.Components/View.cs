@@ -157,7 +157,7 @@ namespace SkiaSharp.Components
                     StrokeWidth = this.BorderSize,
                     IsAntialias = true,
                 })
-                using(var brush = this.BorderBrush.Apply(paint, frame))
+                using(var brush = this.BorderBrush.Apply(canvas, paint, frame))
                 {
                     canvas.DrawPath(roundedRect, paint);
                 }
@@ -194,7 +194,7 @@ namespace SkiaSharp.Components
                     Style = SKPaintStyle.Fill,
                 })
 
-                using(var brush = this.BackgroundBrush.Apply(paint, frame))
+                using(var brush = this.BackgroundBrush.Apply(canvas, paint, frame))
                 {
                     if(this.CornerRadius > 0)
                     {
@@ -265,6 +265,17 @@ namespace SkiaSharp.Components
                 field = value;
                 this.Invalidate();
                 return true;
+            }
+
+            return false;
+        }
+
+        public virtual bool Touch(Touch[] touches)
+        { 
+            foreach (var child in this.children)
+            {
+                if (child.Touch(touches))
+                    return true;
             }
 
             return false;

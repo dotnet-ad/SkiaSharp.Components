@@ -11,7 +11,7 @@ namespace SkiaSharp.Components
 
         public SKColor Color { get; }
 
-        public IDisposable Apply(SKPaint paint, SKRect frame)
+        public IDisposable Apply(SKCanvas canvas, SKPaint paint, SKRect frame)
         {
             paint.Color = this.Color;
             return null;

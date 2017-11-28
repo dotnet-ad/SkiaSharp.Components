@@ -17,6 +17,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+    <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,7 +28,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <AndroidSupportedAbis>arm64-v8a;armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -71,6 +71,15 @@
     <Reference Include="Xamarin.Android.Support.v7.AppCompat">
       <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
     </Reference>
+    <Reference Include="SkiaSharp">
+      <HintPath>..\packages\SkiaSharp.1.59.2\lib\MonoAndroid\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Android">
+      <HintPath>..\packages\SkiaSharp.Views.1.59.2\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook.Yoga">
+      <HintPath>..\packages\Facebook.Yoga.1.5.0-pre1\lib\MonoAndroid\Facebook.Yoga.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -94,6 +103,24 @@
     <Folder Include="Resources\mipmap-xxhdpi\" />
     <Folder Include="Resources\mipmap-xxxhdpi\" />
     <Folder Include="Resources\drawable\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SkiaSharp.Components.Layout.Droid\SkiaSharp.Components.Layout.Droid.csproj">
+      <Project>{77E8BDEF-3BD6-4CA6-AA14-FB3AED34AE10}</Project>
+      <Name>SkiaSharp.Components.Layout.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SkiaSharp.Components.Layout\SkiaSharp.Components.Layout.csproj">
+      <Project>{9F3010ED-6659-44BC-8CB3-15298DE9EEC8}</Project>
+      <Name>SkiaSharp.Components.Layout</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SkiaSharp.Components\SkiaSharp.Components.csproj">
+      <Project>{BC1476F4-B0F1-48F7-8AF1-A70B490E07B0}</Project>
+      <Name>SkiaSharp.Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SkiaSharp.Components.Samples\SkiaSharp.Components.Samples.csproj">
+      <Project>{D1F6B791-43FA-4590-A55A-BC6362C298C1}</Project>
+      <Name>SkiaSharp.Components.Samples</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets')" />

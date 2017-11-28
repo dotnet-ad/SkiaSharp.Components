@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
+using SkiaSharp.Components.Layout.Droid;
 
 namespace SkiaSharp.Components.Samples.Droid
 {
@@ -11,8 +12,9 @@ namespace SkiaSharp.Components.Samples.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.Main);
+            var view = new SimpleFlexView();
+            var renderer = new ViewRenderer(view, this);
+            SetContentView(renderer);
         }
     }
 }

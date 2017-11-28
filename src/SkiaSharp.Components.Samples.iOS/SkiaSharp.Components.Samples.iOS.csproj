@@ -113,7 +113,6 @@
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Renderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SkiaSharp.Components\SkiaSharp.Components.csproj">
@@ -127,6 +126,10 @@
     <ProjectReference Include="..\SkiaSharp.Components.Layout\SkiaSharp.Components.Layout.csproj">
       <Project>{9F3010ED-6659-44BC-8CB3-15298DE9EEC8}</Project>
       <Name>SkiaSharp.Components.Layout</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SkiaSharp.Components.Layout.iOS\SkiaSharp.Components.Layout.iOS.csproj">
+      <Project>{3BFBED46-5D20-4EF5-BD11-F2DDD68A0F97}</Project>
+      <Name>SkiaSharp.Components.Layout.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
