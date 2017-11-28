@@ -4,23 +4,25 @@ namespace SkiaSharp.Components
 {
     public class LinearGradientBrush : IBrush
     {
-        public LinearGradientBrush(SKPoint start, SKPoint end, float[] colors, SKPoint[] points)
+        public LinearGradientBrush(SKColor[] colors, SKPoint direction, float[] points = null)
         {
-            this.Start = start;
-            this.End = end;
+            this.Colors = colors;
+            this.Points = points;
+            this.Direction = direction;
         }
 
-        private SKPoint Start { get; set; }
+        public SKPoint Direction { get; set; }
 
-        private SKPoint End { get; set; }
+        public float[] Points { get; set; }
 
-        private float[] Points { get; set; }
+        public SKColor[] Colors { get; set; }
 
-        private SKColor[] Colors { get; set; }
-
-        public IDisposable Apply(SKPaint paint)
+        public IDisposable Apply(SKPaint paint, SKRect frame)
         {
-            paint.Shader = SKShader.CreateLinearGradient(this.Start, this.End, this.Colors, this.Points, SKShaderTileMode.Clamp);
+            // TODO direction
+            var start = new SKPoint(frame.Left, frame.Top);
+            var end = new SKPoint(frame.Left, frame.Bottom);
+            paint.Shader = SKShader.CreateLinearGradient(start, end, this.Colors, this.Points, SKShaderTileMode.Clamp);
             return paint.Shader;
         }
     }

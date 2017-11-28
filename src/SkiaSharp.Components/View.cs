@@ -157,7 +157,7 @@ namespace SkiaSharp.Components
                     StrokeWidth = this.BorderSize,
                     IsAntialias = true,
                 })
-                using(var brush = this.BorderBrush.Apply(paint))
+                using(var brush = this.BorderBrush.Apply(paint, frame))
                 {
                     canvas.DrawPath(roundedRect, paint);
                 }
@@ -194,7 +194,7 @@ namespace SkiaSharp.Components
                     Style = SKPaintStyle.Fill,
                 })
 
-                using(var brush = this.BackgroundBrush.Apply(paint))
+                using(var brush = this.BackgroundBrush.Apply(paint, frame))
                 {
                     if(this.CornerRadius > 0)
                     {
