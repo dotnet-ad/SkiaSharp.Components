@@ -55,16 +55,28 @@ namespace SkiaSharp.Components
 
         #region Properties
 
+        public float RowSpacing 
+        {
+            get => this.rowSpacing;
+            set => this.SetAndInvalidate(ref this.rowSpacing, value);
+        } 
+
+        public float ColumnSpacing 
+        {
+            get => this.columnSpacing;
+            set => this.SetAndInvalidate(ref this.columnSpacing, value);
+        } 
+
         public IEnumerable<Definition> ColumnDefinitions 
         {
             get => this.columnDefinitions ?? new [] { Definition.Default };
-            set => this.columnDefinitions = value;
+            set => this.SetAndInvalidate(ref this.columnDefinitions, value);
         } 
 
         public IEnumerable<Definition> RowDefinitions
         {
             get => this.rowDefinitions ?? new[] { Definition.Default };
-            set => this.rowDefinitions = value;
+            set => this.SetAndInvalidate(ref this.rowDefinitions, value);
         }
 
         public IEnumerable<Position> Positions => this.positions;
@@ -76,6 +88,8 @@ namespace SkiaSharp.Components
         private IEnumerable<Definition> columnDefinitions, rowDefinitions;
 
         private List<Position> positions = new List<Position>();
+
+        private float rowSpacing, columnSpacing;
 
         public Position GetPosition(View v) => this.positions.FirstOrDefault(x => x.View == v);
 
@@ -107,7 +121,7 @@ namespace SkiaSharp.Components
             // Row sizes
             var rows = this.RowDefinitions.Count();
             var totalRowStars = this.RowDefinitions.Where(x => x.Unit == Unit.Stars).Sum(x => x.Size);
-            var fixedRowSize = this.RowDefinitions.Where(x => x.Unit == Unit.Points).Sum(x => x.Size);
+            var fixedRowSize = this.RowDefinitions.Where(x => x.Unit == Unit.Points).Sum(x => x.Size) - RowSpacing * (rows - 1);
             var remainingRowSize = Math.Max(0, available.Height - fixedRowSize);
             var rowSizes = this.RowDefinitions.Select(x =>
             {
@@ -123,7 +137,7 @@ namespace SkiaSharp.Components
             // Column sizes
             var columns = this.ColumnDefinitions.Count();
             var totalColmunStars = this.ColumnDefinitions.Where(x => x.Unit == Unit.Stars).Sum(x => x.Size);
-            var fixedColumnSize = this.ColumnDefinitions.Where(x => x.Unit == Unit.Points).Sum(x => x.Size);
+            var fixedColumnSize = this.ColumnDefinitions.Where(x => x.Unit == Unit.Points).Sum(x => x.Size) - ColumnSpacing * (columns - 1);
             var remainingColumnSize = Math.Max(0, available.Width - fixedColumnSize);
             var columnSizes = this.ColumnDefinitions.Select(x =>
             {
@@ -147,10 +161,10 @@ namespace SkiaSharp.Components
                 {
                     var height = rowSizes[row];
                     cellSizes[column, row] = SKRect.Create(left, top, width, height);
-                    top += height;
+                    top += height + RowSpacing;
                 }
 
-                left += width;
+                left += width + ColumnSpacing;
                 top = 0;
             }
 

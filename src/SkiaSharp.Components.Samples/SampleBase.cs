@@ -45,6 +45,12 @@ namespace SkiaSharp.Components.Samples
             this.Image = new Box()
             {
                 Fill = new ColorBrush(SKColors.LightGray),
+                CornerRadius = 5.0f,
+                Shadow = new Shadow()
+                {
+                    Blur = new SKPoint(10,10),
+                    Color = SKColors.Black.WithAlpha(80),
+                },
             };
 
             this.Icon = new Path
@@ -69,8 +75,11 @@ namespace SkiaSharp.Components.Samples
                 var memory = new MemoryStream();
                 response.CopyTo(memory);
                 this.Image.Fill = new ImageBrush(() => {
+                    var copy = new MemoryStream();
                     memory.Seek(0, SeekOrigin.Begin);
-                    return memory;
+                    memory.CopyTo(copy);
+                    copy.Seek(0, SeekOrigin.Begin);
+                    return copy;
                 }, 1.0f);
             }
            
