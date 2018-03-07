@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SkiaSharp.Components.Samples.Droid</RootNamespace>
     <AssemblyName>SkiaSharp.Components.Samples.Droid</AssemblyName>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -71,14 +71,14 @@
     <Reference Include="Xamarin.Android.Support.v7.AppCompat">
       <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
     </Reference>
-    <Reference Include="SkiaSharp">
-      <HintPath>..\packages\SkiaSharp.1.59.2\lib\MonoAndroid\SkiaSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp.Views.Android">
-      <HintPath>..\packages\SkiaSharp.Views.1.59.2\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
-    </Reference>
     <Reference Include="Facebook.Yoga">
       <HintPath>..\packages\Facebook.Yoga.1.5.0-pre1\lib\MonoAndroid\Facebook.Yoga.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp">
+      <HintPath>..\packages\SkiaSharp.1.60.0\lib\MonoAndroid\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Android">
+      <HintPath>..\packages\SkiaSharp.Views.1.60.0\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -105,21 +105,17 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SkiaSharp.Components.Layout.Droid\SkiaSharp.Components.Layout.Droid.csproj">
-      <Project>{77E8BDEF-3BD6-4CA6-AA14-FB3AED34AE10}</Project>
-      <Name>SkiaSharp.Components.Layout.Droid</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SkiaSharp.Components.Layout\SkiaSharp.Components.Layout.csproj">
-      <Project>{9F3010ED-6659-44BC-8CB3-15298DE9EEC8}</Project>
-      <Name>SkiaSharp.Components.Layout</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SkiaSharp.Components\SkiaSharp.Components.csproj">
-      <Project>{BC1476F4-B0F1-48F7-8AF1-A70B490E07B0}</Project>
+      <Project>{684C243E-3E23-4897-8B2F-5B35E728E23F}</Project>
       <Name>SkiaSharp.Components</Name>
     </ProjectReference>
     <ProjectReference Include="..\SkiaSharp.Components.Samples\SkiaSharp.Components.Samples.csproj">
       <Project>{D1F6B791-43FA-4590-A55A-BC6362C298C1}</Project>
       <Name>SkiaSharp.Components.Samples</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SkiaSharp.Components.Droid\SkiaSharp.Components.Droid.csproj">
+      <Project>{D774B902-F3D1-4330-9DF1-81FE10709E07}</Project>
+      <Name>SkiaSharp.Components.Droid</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

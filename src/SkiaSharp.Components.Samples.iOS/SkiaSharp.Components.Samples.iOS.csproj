@@ -80,14 +80,14 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="SkiaSharp">
-      <HintPath>..\packages\SkiaSharp.1.59.2\lib\XamariniOS\SkiaSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp.Views.iOS">
-      <HintPath>..\packages\SkiaSharp.Views.1.59.2\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="Facebook.Yoga">
       <HintPath>..\packages\Facebook.Yoga.1.5.0-pre1\lib\Xamarin.iOS10\Facebook.Yoga.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp">
+      <HintPath>..\packages\SkiaSharp.1.60.0\lib\XamariniOS\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.iOS">
+      <HintPath>..\packages\SkiaSharp.Views.1.60.0\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -116,20 +116,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SkiaSharp.Components\SkiaSharp.Components.csproj">
-      <Project>{BC1476F4-B0F1-48F7-8AF1-A70B490E07B0}</Project>
+      <Project>{684C243E-3E23-4897-8B2F-5B35E728E23F}</Project>
       <Name>SkiaSharp.Components</Name>
     </ProjectReference>
     <ProjectReference Include="..\SkiaSharp.Components.Samples\SkiaSharp.Components.Samples.csproj">
       <Project>{D1F6B791-43FA-4590-A55A-BC6362C298C1}</Project>
       <Name>SkiaSharp.Components.Samples</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SkiaSharp.Components.Layout\SkiaSharp.Components.Layout.csproj">
-      <Project>{9F3010ED-6659-44BC-8CB3-15298DE9EEC8}</Project>
-      <Name>SkiaSharp.Components.Layout</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SkiaSharp.Components.Layout.iOS\SkiaSharp.Components.Layout.iOS.csproj">
-      <Project>{3BFBED46-5D20-4EF5-BD11-F2DDD68A0F97}</Project>
-      <Name>SkiaSharp.Components.Layout.iOS</Name>
+    <ProjectReference Include="..\SkiaSharp.Components.iOS\SkiaSharp.Components.iOS.csproj">
+      <Project>{BD7EE529-C17D-4468-BA87-C2A72949D33D}</Project>
+      <Name>SkiaSharp.Components.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

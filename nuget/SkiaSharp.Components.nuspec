@@ -14,12 +14,24 @@
        <summary>Producing rendering code for SkiaSharp can be extremely verbose and repetitive. SkiaSharp.Components are higher level view that makes declarations more concise with components..</summary>
      <tags>skia, skiasharp, ui, components</tags>
       <dependencies>
-        <group>
-            <dependency id="SkiaSharp" version="1.59.2" />
-        </group>
+          <group targetFramework="netstandard1.3">
+            <dependency id="SkiaSharp" version="1.60.0" />
+          </group>
+          <group targetFramework="xamarinios">
+            <dependency id="SkiaSharp.Views" version="1.60.0" />
+          </group>
+          <group targetFramework="monoandroid">
+            <dependency id="SkiaSharp.Views" version="1.60.0" />
+          </group>
     </dependencies>
    </metadata>
    <files>
      <file src="..\src\SkiaSharp.Components\bin\Release\netstandard1.3\SkiaSharp.Components.dll" target="lib\netstandard1.3\SkiaSharp.Components.dll" />
+
+     <file src="..\src\SkiaSharp.Components\bin\Release\netstandard1.3\SkiaSharp.Components.dll" target="lib\xamarinios\SkiaSharp.Components.dll" />
+     <file src="..\src\SkiaSharp.Components.iOS\bin\Release\SkiaSharp.Components.iOS.dll" target="lib\xamarinios\SkiaSharp.Components.iOS.dll" />
+
+     <file src="..\src\SkiaSharp.Components\bin\Release\netstandard1.3\SkiaSharp.Components.dll" target="lib\monoandroid\SkiaSharp.Components.dll" />
+     <file src="..\src\SkiaSharp.Components.Droid\bin\Release\SkiaSharp.Components.Droid.dll" target="lib\monoandroid\SkiaSharp.Components.Droid.dll" />
    </files>
 </package>

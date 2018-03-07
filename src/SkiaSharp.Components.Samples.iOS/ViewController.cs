@@ -1,5 +1,4 @@
 ﻿using System;
-using SkiaSharp.Components.Layout.iOS;
 using UIKit;
 
 namespace SkiaSharp.Components.Samples.iOS
@@ -15,8 +14,8 @@ namespace SkiaSharp.Components.Samples.iOS
         {
             base.ViewDidLoad();
 
-            var view = new SimpleFlexView();
-            var renderer = new ViewRenderer(view);
+            var view = new GridSample();
+            var renderer = new Renderer(view.Build());
             this.View = renderer;
         }
     }

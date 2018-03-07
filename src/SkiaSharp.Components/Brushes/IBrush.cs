@@ -1,8 +1,11 @@
-﻿using System;
-namespace SkiaSharp.Components
+﻿namespace SkiaSharp.Components
 {
     public interface IBrush
     {
-        IDisposable Apply(SKCanvas canvas, SKPaint paint, SKRect frame);
+        void Text(SKCanvas canvas, string text, SKRect frame, SKTypeface typeface, float size, TextDecoration decorations);
+
+        void Fill(SKCanvas canvas, SKPath path);
+
+        void Stroke(SKCanvas canvas, SKPath path, float size, StrokeStyle style);
     }
 }
