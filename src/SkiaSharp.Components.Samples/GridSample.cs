@@ -25,7 +25,7 @@
             result.AddView(this.Icon, 0, 0);
             result.AddView(this.Title, 1, 0);
             result.AddView(this.Description, 0, 1, 2);
-            result.AddView( new Padding()
+            result.AddView( new Padding
             {
                 Child = this.Image,
                 Margin = new Margin(10),

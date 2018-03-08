@@ -27,6 +27,8 @@ namespace SkiaSharp.Components
 
         private Alignment verticalAlignment;
 
+        private Dictionary<Span, SKRect> spanLayout;
+
         #endregion
 
         #region Properties
@@ -81,31 +83,43 @@ namespace SkiaSharp.Components
 
         #endregion
 
-        public override void Render(SKCanvas canvas)
+        public override void Layout(SKRect available)
         {
-            var absolute = this.AbsoluteFrame;
-
-            var splitSpans = SplitLines(this.Spans, this.AbsoluteFrame, this.LineHeight, out SKSize totalSize);
+            var splitSpans = SplitLines(this.Spans, available, this.LineHeight, out SKSize totalSize);
 
             var offset = SKPoint.Empty;
 
             if (this.VerticalAlignment == Alignment.Center)
             {
-                offset.Y = absolute.Height / 2 - totalSize.Height / 2;
+                offset.Y = available.Height / 2 - totalSize.Height / 2;
             }
             else if (this.VerticalAlignment == Alignment.End)
             {
-                offset.Y = absolute.Height - totalSize.Height;
+                offset.Y = available.Height - totalSize.Height;
             }
+
+            spanLayout = new Dictionary<Span, SKRect>();
 
             foreach (var span in splitSpans)
             {
-                var area = SKRect.Create(offset.X + absolute.Left + span.LayoutFrame.Left - span.Bounds.Left, offset.Y + absolute.Top + span.LayoutFrame.Top, span.LayoutFrame.Width, span.LayoutFrame.Height);
-                span.ForegroundBrush.Text(canvas, span.Text, area, span.Typeface, span.TextSize, span.Decorations);
+                var area = SKRect.Create(offset.X + available.Left + span.LayoutFrame.Left - span.Bounds.Left, offset.Y + available.Top + span.LayoutFrame.Top, span.LayoutFrame.Width, span.LayoutFrame.Height);
+                spanLayout[span] = area;
+            }
+
+            base.Layout(SKRect.Create(available.Left, available.Top, totalSize.Width, totalSize.Height));
+        }
+
+        public override void Render(SKCanvas canvas)
+        {
+            base.Render(canvas);
+
+            foreach (var span in spanLayout)
+            {
+                span.Key.ForegroundBrush.Text(canvas, span.Key.Text, span.Value, span.Key.Typeface, span.Key.TextSize, span.Key.Decorations);
             }
         }
 
-        private static SKSize Measure(Label view, SKRect area)
+        public static SKSize Measure(Label view, SKRect area)
         {
             var spans = SplitLines(view.Spans, area, view.LineHeight, out SKSize size);
             return size;

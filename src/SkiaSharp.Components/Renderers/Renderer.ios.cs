@@ -17,9 +17,18 @@ namespace SkiaSharp.Components
 
         private View view;
 
+        private SKSize size;
+
         private void OnViewInvalidated(object sender, EventArgs e)
         {
+            var newSize = new SKSize((float)this.Bounds.Size.Width, (float)this.Bounds.Size.Height);
             Debug.WriteLine("<OnViewInvalidated start>");
+            if(this.size != newSize)
+            {
+                Debug.WriteLine("Layout...");
+                this.size = newSize;
+                this.view.Layout(SKRect.Create(SKPoint.Empty, ToPlatform(this.size)));
+            }
             this.SetNeedsDisplayInRect(this.Bounds);
             Debug.WriteLine("<OnViewInvalidated end>");
         }
@@ -33,9 +42,7 @@ namespace SkiaSharp.Components
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();
-            Debug.WriteLine("<LayoutSubviews start>");
-            this.view.Layout(SKRect.Create(SKPoint.Empty, ToPlatform(new SKSize((float)this.Bounds.Size.Width, (float)this.Bounds.Size.Height))));
-            Debug.WriteLine("<LayoutSubviews end>");
+            this.OnViewInvalidated(this, EventArgs.Empty);
         }
 
         #region Touches

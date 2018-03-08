@@ -14,7 +14,7 @@ namespace SkiaSharp.Components.Samples.iOS
         {
             base.ViewDidLoad();
 
-            var view = new GridSample();
+            var view = new FlexSample();
             var renderer = new Renderer(view.Build());
             this.View = renderer;
         }
