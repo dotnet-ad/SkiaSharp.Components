@@ -38,7 +38,7 @@ namespace SkiaSharp.Components
                     var top = position.Top;
                     var w = Math.Min(position.Width, available.Width - position.Left);
                     var h = Math.Min(position.Height, available.Height - position.Top);
-                    child.Layout(SKRect.Create(left, top, w, h));
+                    child.LayoutIfNeeded(SKRect.Create(left, top, w, h));
                 }
             }
         }

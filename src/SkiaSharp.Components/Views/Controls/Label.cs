@@ -65,7 +65,7 @@ namespace SkiaSharp.Components
 
         public float LineHeight
         {
-            get => this.lineHeight ?? this.TextSize * 1.2f;
+            get => this.lineHeight ?? this.TextSize * Density.Global * 1.15f;
             set => this.SetAndInvalidate(ref this.lineHeight, value);
         }
 
@@ -113,9 +113,12 @@ namespace SkiaSharp.Components
         {
             base.Render(canvas);
 
-            foreach (var span in spanLayout)
+            if(spanLayout != null)
             {
-                span.Key.ForegroundBrush.Text(canvas, span.Key.Text, span.Value, span.Key.Typeface, span.Key.TextSize, span.Key.Decorations);
+                foreach (var span in spanLayout)
+                {
+                    span.Key.ForegroundBrush.Text(canvas, span.Key.Text, span.Value, span.Key.Typeface, span.Key.TextSize, span.Key.Decorations);
+                } 
             }
         }
 
@@ -199,7 +202,7 @@ namespace SkiaSharp.Components
                     TextAlign = SKTextAlign.Left,
                     Typeface = span.Typeface,
                     FakeBoldText = span.Decorations.HasFlag(TextDecoration.Bold),
-                    TextSize = span.TextSize,
+                    TextSize = span.TextSize * Density.Global,
                 })
                 {
                     var previousLine = line;

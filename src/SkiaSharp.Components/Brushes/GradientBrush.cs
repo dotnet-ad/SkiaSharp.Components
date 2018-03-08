@@ -19,13 +19,13 @@ namespace SkiaSharp.Components
 
         public IEnumerable<Tuple<float, SKColor>> Colors { get; set; }
 
-        public void Fill(SKCanvas canvas, SKPath path)
+        private SKPaint CreatePaint(SKPath path)
         {
             var bounds = path.Bounds;
             var start = new SKPoint(bounds.Left + this.Start.X * bounds.Width, bounds.Top + this.Start.Y * bounds.Height);
             var end = new SKPoint(bounds.Left + this.End.X * bounds.Width, bounds.Top + this.End.Y * bounds.Height);
 
-            using (var paint = new SKPaint()
+            return new SKPaint()
             {
                 IsAntialias = true,
                 Shader = SKShader.CreateLinearGradient(start,
@@ -34,20 +34,46 @@ namespace SkiaSharp.Components
                                                        this.Colors.Select(x => x.Item1).ToArray(),
                                                        SKShaderTileMode.Repeat),
                 Style = SKPaintStyle.Fill,
-            })
+            };
+        }
+
+        public void Fill(SKCanvas canvas, SKPath path)
+        {
+            using (var paint = this.CreatePaint(path))
             {
+                paint.Style = SKPaintStyle.Fill;
                 canvas.DrawPath(path, paint);
             }
         }
 
         public void Stroke(SKCanvas canvas, SKPath path, float size, StrokeStyle style)
         {
-            throw new NotImplementedException();
+            using (var paint = this.CreatePaint(path))
+            {
+                paint.StrokeWidth = size;
+                paint.Style = SKPaintStyle.Stroke;
+                canvas.DrawPath(path, paint);
+            }
         }
 
         public void Text(SKCanvas canvas, string text, SKRect frame, SKTypeface typeface, float size, TextDecoration decorations)
         {
-            throw new NotImplementedException();
+            var path = new SKPath();
+            path.AddRect(frame);
+            using (var paint = this.CreatePaint(path))
+            {
+                paint.IsAntialias = true;
+                paint.Style = SKPaintStyle.Fill;
+                paint.TextAlign = SKTextAlign.Left;
+                paint.Typeface = typeface;
+                paint.FakeBoldText = decorations.HasFlag(TextDecoration.Bold);
+                paint.TextSize = size * Density.Global;
+          
+                if (decorations.HasFlag(TextDecoration.Italic))
+                    paint.TextSkewX = 0.5f;
+
+                canvas.DrawText(text, frame.Left, frame.Bottom, paint);
+            }
         }
     }
 }

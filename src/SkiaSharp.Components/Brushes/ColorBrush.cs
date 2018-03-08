@@ -58,7 +58,7 @@ namespace SkiaSharp.Components
                 TextAlign = SKTextAlign.Left,
                 Typeface = typeface,
                 FakeBoldText = decorations.HasFlag(TextDecoration.Bold),
-                TextSize = size,
+                TextSize = size * Density.Global,
             })
             {
                 if (decorations.HasFlag(TextDecoration.Italic))
