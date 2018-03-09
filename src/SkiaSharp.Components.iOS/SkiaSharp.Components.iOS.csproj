@@ -62,6 +62,9 @@
     <Compile Include="..\SkiaSharp.Components\Renderers\Renderer.ios.cs">
       <Link>Renderer.ios.cs</Link>
     </Compile>
+    <Compile Include="..\SkiaSharp.Components\Renderers\BuilderRenderer.ios.cs">
+      <Link>BuilderRenderer.ios.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

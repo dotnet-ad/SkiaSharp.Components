@@ -45,12 +45,18 @@ namespace SkiaSharp.Components
             {
                 this.root.Left = available.Left;
                 this.root.Top = available.Top;
-                this.root.Width = available.Width;
-                this.root.Height = available.Height;
+
+                if (available.Width != float.MaxValue)
+                    this.root.Width = available.Width;
+                
+                if(available.Height != float.MaxValue)
+                    this.root.Height = available.Height;
 
                 this.root.CalculateLayout();
 
                 this.ApplyLayout(this.root, SKPoint.Empty);
+
+                this.LayoutFrame = SKRect.Create(this.root.LayoutX, this.root.LayoutX, this.root.LayoutWidth, this.root.LayoutHeight);
             }
         }
 

@@ -8,36 +8,60 @@ namespace SkiaSharp.Components
 {
     public class Renderer : SKCanvasView
     {
-        public Renderer(View view)
+        public Renderer()
         {
-            this.view = view;
             this.PaintSurface += OnPaint;
-            view.Invalidated += OnViewInvalidated; // TODO Weak listener
         }
 
         private View view;
 
         private SKSize size;
 
+        public View View
+        {
+            get => this.view;
+            set
+            {
+                if(this.view != null)
+                {
+                    view.Invalidated -= OnViewInvalidated; 
+                }
+
+                this.view = value;
+                this.size = SKSize.Empty;
+
+                if (this.view != null)
+                {
+                    this.view.Invalidate();
+                    view.Invalidated += OnViewInvalidated; // TODO Weak listener
+                }
+            }
+        }
+
         private void OnViewInvalidated(object sender, EventArgs e)
         {
-            Components.Density.Global = (float)UIScreen.MainScreen.Scale;
+            Density.Global = (float)UIScreen.MainScreen.Scale;
 
-            var newSize = new SKSize((float)this.Bounds.Size.Width, (float)this.Bounds.Size.Height);
-            Debug.WriteLine("<OnViewInvalidated start>");
-            if(this.size != newSize)
+            if(this.View != null)
             {
-                Debug.WriteLine("Layout...");
-                this.size = newSize;
-                this.view.Layout(SKRect.Create(SKPoint.Empty, ToPlatform(this.size)));
+                var newSize = new SKSize((float)this.Bounds.Size.Width, (float)this.Bounds.Size.Height);
+                Debug.WriteLine($"<{this.View.GetType().Name} ({this.GetHashCode()})> Invalidated start");
+                if (this.size != newSize)
+                {
+                    Debug.WriteLine($"<{this.View.GetType().Name} ({this.GetHashCode()})> \tLayouting...");
+                    this.size = newSize;
+                    this.view.Layout(SKRect.Create(SKPoint.Empty, ToPlatform(this.size)));
+                }
+                Debug.WriteLine($"<{this.View.GetType().Name} ({this.GetHashCode()})> \tSize : {this.size}");
+                this.SetNeedsDisplayInRect(this.Bounds);
+                Debug.WriteLine($"<{this.View.GetType().Name} ({this.GetHashCode()})> Invalidated end");
             }
-            this.SetNeedsDisplayInRect(this.Bounds);
-            Debug.WriteLine("<OnViewInvalidated end>");
         }
 
         private void OnPaint(object sender, SKPaintSurfaceEventArgs e)
         {
             e.Surface.Canvas.Clear(SKColors.White);
+            Debug.WriteLine($"<{this.View.GetType().Name} ({this.GetHashCode()})> Rendering {this.view.AbsoluteFrame}");
             this.view.Render(e.Surface.Canvas);
         }
 
@@ -132,26 +156,24 @@ namespace SkiaSharp.Components
 
         #endregion
 
-        private float Density { get; } = 2;
-
         private SKPoint FromPlatform(SKPoint point)
         {
-            return new SKPoint(point.X / Density, point.Y / Density);
+            return new SKPoint(point.X / Density.Global, point.Y / Density.Global);
         }
 
         private SKSize FromPlatform(SKSize point)
         {
-            return new SKSize(point.Width / Density, point.Height / Density);
+            return new SKSize(point.Width / Density.Global, point.Height / Density.Global);
         }
 
         private SKPoint ToPlatform(SKPoint point)
         {
-            return new SKPoint(point.X * Density, point.Y * Density);
+            return new SKPoint(point.X * Density.Global, point.Y * Density.Global);
         }
 
         private SKSize ToPlatform(SKSize point)
         {
-            return new SKSize(point.Width * Density, point.Height * Density);
+            return new SKSize(point.Width * Density.Global, point.Height * Density.Global);
         }
     }
 }
