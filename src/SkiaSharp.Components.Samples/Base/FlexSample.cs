@@ -34,16 +34,6 @@ namespace SkiaSharp.Components.Samples
                 AlignSelf = YogaAlign.Stretch,
             };
 
-            descNode.SetMeasureFunction((n,w,wm,h,hm) => 
-            {
-                var measured = Label.Measure(n.Data as Label, SKRect.Create(0, 0, w, h));
-                return new YogaSize()
-                {
-                    width = measured.Width,
-                    height = measured.Height,
-                };
-            });
-
             var boxNode = new Flex.Node(this.Box)
             {
                 Margin = 20,

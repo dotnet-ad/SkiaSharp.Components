@@ -46,12 +46,21 @@
     <Reference Include="SkiaSharp.Views.Android">
       <HintPath>..\packages\SkiaSharp.Views.1.60.0\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\SkiaSharp.Components\Renderers\Renderer.android.cs">
       <Link>Renderer.android.cs</Link>
+    </Compile>
+    <Compile Include="..\SkiaSharp.Components\Renderers\BuilderRenderer.android.cs">
+      <Link>BuilderRenderer.android.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

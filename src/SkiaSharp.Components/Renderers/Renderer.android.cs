@@ -9,17 +9,36 @@ namespace SkiaSharp.Components
 {
     public class Renderer : SKCanvasView
     {
-        public Renderer(View view, Context context) : base(context)
+        public Renderer(Context context) : base(context)
         {
-            this.view = view;
             this.PaintSurface += OnPaint;
-            view.Invalidated += OnViewInvalidated; // TODO Weak listener
         }
 
         private View view;
 
-
         private SKRect size;
+
+        public View View
+        {
+            get => this.view;
+            set
+            {
+                if (this.view != null)
+                {
+                    view.Invalidated -= OnViewInvalidated;
+                }
+
+                this.view = value;
+                //this.size = SKRect.Empty;
+
+                if (this.view != null)
+                {
+                    this.view.Invalidate();
+                    view.Invalidated += OnViewInvalidated; // TODO Weak listener
+                }
+            }
+        }
+
 
         private void OnViewInvalidated(object sender, EventArgs e)
         {

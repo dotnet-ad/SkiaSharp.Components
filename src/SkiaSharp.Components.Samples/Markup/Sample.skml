@@ -1,0 +1,10 @@
+﻿<Column Style="padding:20">
+    <Row Style="height:50">
+        <Box Name="icon" Style="width:50;margin-right:20;fill:#FFFF0000" />
+        <Box Name="title" Style="flex:1;font-size:50;fill:#FF00FF00" />
+    </Row>
+    <Box Style="margin:20;padding:20;shadow:0,0,10,10,#22000000;corner-radius:5;fill:#FFFDFDFD">
+        <Box Name="description" Style="height:100;fill:#66778899" />
+    </Box>
+    <Box Style="flex:1;fill:#FF899067;corner-radius:5" />
+</Column>

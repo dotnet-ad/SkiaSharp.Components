@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Components.iOS", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Components.Droid", "SkiaSharp.Components.Droid\SkiaSharp.Components.Droid.csproj", "{D774B902-F3D1-4330-9DF1-81FE10709E07}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Markup", "Markup", "{85140713-94A8-4D8F-BFE9-79832386B490}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharp.Components.Markup", "SkiaSharp.Components.Markup\SkiaSharp.Components.Markup.csproj", "{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +115,18 @@ Global
 		{D774B902-F3D1-4330-9DF1-81FE10709E07}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{D774B902-F3D1-4330-9DF1-81FE10709E07}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{D774B902-F3D1-4330-9DF1-81FE10709E07}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}.Release|iPhone.Build.0 = Release|Any CPU
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D1F6B791-43FA-4590-A55A-BC6362C298C1} = {AAE13703-DAD3-41CD-81BD-29EFBE49485D}
@@ -119,5 +135,6 @@ Global
 		{055E68D6-4D88-4F33-8C09-BDDB91A9636E} = {699CB728-3CD6-4A62-9E65-C5386C04C3FC}
 		{BD7EE529-C17D-4468-BA87-C2A72949D33D} = {05F323E6-6F3C-44FF-BFD2-00CE763EC65B}
 		{D774B902-F3D1-4330-9DF1-81FE10709E07} = {05F323E6-6F3C-44FF-BFD2-00CE763EC65B}
+		{67925AD2-8346-49F5-8B21-2F6FADA2E0C1} = {85140713-94A8-4D8F-BFE9-79832386B490}
 	EndGlobalSection
 EndGlobal

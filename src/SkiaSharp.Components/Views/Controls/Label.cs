@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SkiaSharp.Components
 {
-    public class Label : View
+    public class Label : View, IMeasurable
     {
         #region Constants
 
@@ -85,7 +85,7 @@ namespace SkiaSharp.Components
 
         public override void Layout(SKRect available)
         {
-            var splitSpans = SplitLines(this.Spans, available, this.LineHeight, out SKSize totalSize);
+            var splitSpans = SplitLines(this.Spans, available.Size, this.LineHeight, out SKSize totalSize);
 
             var offset = SKPoint.Empty;
 
@@ -122,9 +122,9 @@ namespace SkiaSharp.Components
             }
         }
 
-        public static SKSize Measure(Label view, SKRect area)
+        public SKSize Measure(SKSize area)
         {
-            var spans = SplitLines(view.Spans, area, view.LineHeight, out SKSize size);
+            var spans = SplitLines(this.Spans, area, this.LineHeight, out SKSize size);
             return size;
         }
 
@@ -174,7 +174,7 @@ namespace SkiaSharp.Components
             return lineHeight;
         }
 
-        private static Span[] SplitLines(IEnumerable<Span> text, SKRect frame, float lineHeight, out SKSize size)
+        private static Span[] SplitLines(IEnumerable<Span> text, SKSize frame, float lineHeight, out SKSize size)
         {
             if (text == null)
             {

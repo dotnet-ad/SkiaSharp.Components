@@ -1,4 +1,5 @@
 ﻿using Facebook.Yoga;
+using System;
 
 namespace SkiaSharp.Components
 {
@@ -13,6 +14,56 @@ namespace SkiaSharp.Components
             public Node(View view)
             {
                 this.Data = view;
+
+                if(view is IMeasurable)
+                {
+                    this.HasAutoHeight = true;
+                }
+            }
+
+            public View Find(string name)
+            {
+                if (this.View?.Name == name)
+                    return this.View;
+
+                foreach (var child in this)
+                {
+                    if(child is Flex.Node flex)
+                    {
+                        var found = flex.Find(name);
+                        if (found != null)
+                            return found;
+                    }
+                }
+
+                return null;
+            }
+
+            public bool HasAutoHeight
+            {
+                set
+                {
+                    if(value == true)
+                    {
+                        if (this.View is IMeasurable view)
+                        {
+                            this.SetMeasureFunction((n, w, wm, h, hm) =>
+                            {
+                                var measured = view.Measure(new SKSize(w, h));
+                                return new YogaSize
+                                {
+                                    width = measured.Width,
+                                    height = measured.Height,
+                                };
+                            });
+                        }
+                        else throw new InvalidOperationException($"Can't set autoheight on view of type '{this.View.GetType().Name}'");
+                    }
+                    else
+                    {
+                        this.SetMeasureFunction(null);
+                    }
+                }
             }
 
             public View View => this.Data as View;
@@ -88,10 +139,11 @@ namespace SkiaSharp.Components
 
         private void ApplyLayout(YogaNode n, SKPoint origin)
         {
+            origin.X += n.LayoutX;
+            origin.Y += n.LayoutY;
+
             if (n.Data is View view)
             {
-                origin.X += n.LayoutX;
-                origin.Y += n.LayoutY;
                 view.LayoutIfNeeded(SKRect.Create(origin.X, origin.Y, n.LayoutWidth, n.LayoutHeight));
             }
 

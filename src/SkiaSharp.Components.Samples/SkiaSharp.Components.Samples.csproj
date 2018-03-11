@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SkiaSharp.Components\SkiaSharp.Components.csproj" />
+    <ProjectReference Include="..\SkiaSharp.Components.Markup\SkiaSharp.Components.Markup.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Facebook.Yoga" Version="1.5.0-pre1" />
@@ -13,5 +14,12 @@
   <ItemGroup>
     <Folder Include="Base\" />
     <Folder Include="Builder\" />
+    <Folder Include="Markup\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Markup\Sample.skml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Markup\Sample.skml" />
   </ItemGroup>
 </Project>
