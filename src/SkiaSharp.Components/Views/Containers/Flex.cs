@@ -21,16 +21,16 @@ namespace SkiaSharp.Components
                 }
             }
 
-            public View Find(string name)
+            public T Find<T>(string name) where T : View
             {
                 if (this.View?.Name == name)
-                    return this.View;
+                    return (T)this.View;
 
                 foreach (var child in this)
                 {
                     if(child is Flex.Node flex)
                     {
-                        var found = flex.Find(name);
+                        var found = flex.Find<T>(name);
                         if (found != null)
                             return found;
                     }

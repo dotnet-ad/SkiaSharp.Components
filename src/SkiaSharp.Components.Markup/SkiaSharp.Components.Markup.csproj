@@ -7,4 +7,9 @@
   <ItemGroup>
     <ProjectReference Include="..\SkiaSharp.Components\SkiaSharp.Components.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Parsing\Layout\" />
+    <Folder Include="Parsing\Stylesheet\" />
+    <Folder Include="Parsing\Layout\Nodes\" />
+  </ItemGroup>
 </Project>

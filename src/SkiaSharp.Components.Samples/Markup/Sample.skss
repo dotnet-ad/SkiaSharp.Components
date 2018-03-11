@@ -1,0 +1,7 @@
+﻿.box-shadow
+{
+    padding:20;
+    shadow:0,0,10,10,#22000000;
+    corner-radius:5;
+    fill:#FFFDFDFD;
+}
