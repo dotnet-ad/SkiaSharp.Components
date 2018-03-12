@@ -45,10 +45,10 @@ namespace SkiaSharp.Components
             set => this.SetAndInvalidate(ref this.spans, value);
         }
 
-        public IBrush ForegroundBrush
+        public IBrush Foreground
         {
-            get => this.style.ForegroundBrush;
-            set => this.SetAndInvalidate(() => this.ForegroundBrush, (v) => this.style.ForegroundBrush = v, value);
+            get => this.style.Foreground;
+            set => this.SetAndInvalidate(() => this.Foreground, (v) => this.style.Foreground = v, value);
         }
 
         public SKTypeface Typeface
@@ -65,13 +65,13 @@ namespace SkiaSharp.Components
 
         public float LineHeight
         {
-            get => this.lineHeight ?? this.TextSize * Density.Global * 1.15f;
+            get => this.lineHeight ?? this.TextSize * 1.15f;
             set => this.SetAndInvalidate(ref this.lineHeight, value);
         }
 
         public string Text
         {
-            get => string.Join("", this.Spans.Select(x => x.Text) ?? new string[0]);
+            get => string.Join("", this.Spans?.Select(x => x.Text) ?? new string[0]);
             set => this.Spans = new[]
             {
                 new Span(this.style)
@@ -85,7 +85,7 @@ namespace SkiaSharp.Components
 
         public override void Layout(SKRect available)
         {
-            var splitSpans = SplitLines(this.Spans, available.Size, this.LineHeight, out SKSize totalSize);
+            var splitSpans = SplitLines(this.Spans, available.Size, this.LineHeight * Density.Global, out SKSize totalSize);
 
             var offset = SKPoint.Empty;
 
@@ -117,14 +117,14 @@ namespace SkiaSharp.Components
             {
                 foreach (var span in spanLayout)
                 {
-                    span.Key.ForegroundBrush.Text(canvas, span.Key.Text, span.Value, span.Key.Typeface, span.Key.TextSize, span.Key.Decorations);
+                    span.Key.Foreground.Text(canvas, span.Key.Text, span.Value, span.Key.Typeface, span.Key.TextSize, span.Key.Decorations);
                 } 
             }
         }
 
         public SKSize Measure(SKSize area)
         {
-            var spans = SplitLines(this.Spans, area, this.LineHeight, out SKSize size);
+            var spans = SplitLines(this.Spans, area, this.LineHeight * Density.Global, out SKSize size);
             return size;
         }
 
@@ -237,7 +237,7 @@ namespace SkiaSharp.Components
                             updatedSpans.Add(new Span()
                             {
                                 Text = span.Text,
-                                ForegroundBrush = span.ForegroundBrush,
+                                Foreground = span.Foreground,
                                 TextSize = span.TextSize,
                                 Line = line,
                                 Typeface = span.Typeface,

@@ -1,13 +1,18 @@
-﻿using System.Linq;
-
-namespace SkiaSharp.Components
+﻿namespace SkiaSharp.Components
 {
     public class Stroke
     {
-        public float Size { get; set; } = 1;
+        public Stroke(float size, IBrush brush, StrokeStyle style)
+        {
+            this.Size = size;
+            this.Brush = brush;
+            this.Style = style;
+        }
 
-        public IBrush Brush { get; set; }
+        public float Size { get; } = 1;
 
-        public StrokeStyle Style { get; set; }
+        public IBrush Brush { get; }
+
+        public StrokeStyle Style { get; }
     }
 }

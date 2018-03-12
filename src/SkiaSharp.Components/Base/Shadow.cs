@@ -2,10 +2,17 @@
 {
     public class Shadow
     {
-        public SKPoint Offset { get; set; }
+        public Shadow(SKPoint offset, SKPoint blur, SKColor color)
+        {
+            this.Offset = offset;
+            this.Blur = blur;
+            this.Color = color;
+        }
 
-        public SKPoint Blur { get; set; }
+        public SKPoint Offset { get; }
 
-        public SKColor Color { get; set; }
+        public SKPoint Blur { get; }
+
+        public SKColor Color { get; }
     }
 }

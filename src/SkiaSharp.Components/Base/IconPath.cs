@@ -152,13 +152,37 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath Aperture => ApertureInstance.Value;
+         private static Lazy<SKPath> ArchiveInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.MoveTo(21,8);
+             source.AddPoly(new SKPoint [] { new SKPoint(21,8),new SKPoint(21,21),new SKPoint(3,21),new SKPoint(3,8),},false);
+             source.AddRect(SKRect.Create(1,3,22,5));
+             source.MoveTo(10,12);
+             source.LineTo(14,12);
+             return source;
+         });
+
+         public static SKPath Archive => ArchiveInstance.Value;
+         private static Lazy<SKPath> ArrowDownCircleInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddCircle(12,12,10);
+             source.MoveTo(8,12);
+             source.AddPoly(new SKPoint [] { new SKPoint(8,12),new SKPoint(12,16),new SKPoint(16,12),},false);
+             source.MoveTo(12,8);
+             source.LineTo(12,16);
+             return source;
+         });
+
+         public static SKPath ArrowDownCircle => ArrowDownCircleInstance.Value;
          private static Lazy<SKPath> ArrowDownLeftInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.MoveTo(18,6);
-             source.LineTo(6,18);
-             source.MoveTo(15,18);
-             source.AddPoly(new SKPoint [] { new SKPoint(15,18),new SKPoint(6,18),new SKPoint(6,9),},false);
+             source.MoveTo(17,7);
+             source.LineTo(7,17);
+             source.MoveTo(17,17);
+             source.AddPoly(new SKPoint [] { new SKPoint(17,17),new SKPoint(7,17),new SKPoint(7,7),},false);
              return source;
          });
 
@@ -166,10 +190,10 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> ArrowDownRightInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.MoveTo(6,6);
-             source.LineTo(18,18);
-             source.MoveTo(9,18);
-             source.AddPoly(new SKPoint [] { new SKPoint(9,18),new SKPoint(18,18),new SKPoint(18,9),},false);
+             source.MoveTo(7,7);
+             source.LineTo(17,17);
+             source.MoveTo(17,7);
+             source.AddPoly(new SKPoint [] { new SKPoint(17,7),new SKPoint(17,17),new SKPoint(7,17),},false);
              return source;
          });
 
@@ -177,43 +201,79 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> ArrowDownInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.MoveTo(12,4);
-             source.LineTo(12,20);
-             source.MoveTo(18,14);
-             source.AddPoly(new SKPoint [] { new SKPoint(18,14),new SKPoint(12,20),new SKPoint(6,14),},false);
+             source.MoveTo(12,5);
+             source.LineTo(12,19);
+             source.MoveTo(19,12);
+             source.AddPoly(new SKPoint [] { new SKPoint(19,12),new SKPoint(12,19),new SKPoint(5,12),},false);
              return source;
          });
 
          public static SKPath ArrowDown => ArrowDownInstance.Value;
+         private static Lazy<SKPath> ArrowLeftCircleInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddCircle(12,12,10);
+             source.MoveTo(12,8);
+             source.AddPoly(new SKPoint [] { new SKPoint(12,8),new SKPoint(8,12),new SKPoint(12,16),},false);
+             source.MoveTo(16,12);
+             source.LineTo(8,12);
+             return source;
+         });
+
+         public static SKPath ArrowLeftCircle => ArrowLeftCircleInstance.Value;
          private static Lazy<SKPath> ArrowLeftInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.MoveTo(20,12);
-             source.LineTo(4,12);
-             source.MoveTo(10,18);
-             source.AddPoly(new SKPoint [] { new SKPoint(10,18),new SKPoint(4,12),new SKPoint(10,6),},false);
+             source.MoveTo(19,12);
+             source.LineTo(5,12);
+             source.MoveTo(12,19);
+             source.AddPoly(new SKPoint [] { new SKPoint(12,19),new SKPoint(5,12),new SKPoint(12,5),},false);
              return source;
          });
 
          public static SKPath ArrowLeft => ArrowLeftInstance.Value;
+         private static Lazy<SKPath> ArrowRightCircleInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddCircle(12,12,10);
+             source.MoveTo(12,16);
+             source.AddPoly(new SKPoint [] { new SKPoint(12,16),new SKPoint(16,12),new SKPoint(12,8),},false);
+             source.MoveTo(8,12);
+             source.LineTo(16,12);
+             return source;
+         });
+
+         public static SKPath ArrowRightCircle => ArrowRightCircleInstance.Value;
          private static Lazy<SKPath> ArrowRightInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.MoveTo(4,12);
-             source.LineTo(20,12);
-             source.MoveTo(14,6);
-             source.AddPoly(new SKPoint [] { new SKPoint(14,6),new SKPoint(20,12),new SKPoint(14,18),},false);
+             source.MoveTo(5,12);
+             source.LineTo(19,12);
+             source.MoveTo(12,5);
+             source.AddPoly(new SKPoint [] { new SKPoint(12,5),new SKPoint(19,12),new SKPoint(12,19),},false);
              return source;
          });
 
          public static SKPath ArrowRight => ArrowRightInstance.Value;
+         private static Lazy<SKPath> ArrowUpCircleInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddCircle(12,12,10);
+             source.MoveTo(16,12);
+             source.AddPoly(new SKPoint [] { new SKPoint(16,12),new SKPoint(12,8),new SKPoint(8,12),},false);
+             source.MoveTo(12,16);
+             source.LineTo(12,8);
+             return source;
+         });
+
+         public static SKPath ArrowUpCircle => ArrowUpCircleInstance.Value;
          private static Lazy<SKPath> ArrowUpLeftInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.MoveTo(18,18);
-             source.LineTo(6,6);
-             source.MoveTo(15,6);
-             source.AddPoly(new SKPoint [] { new SKPoint(15,6),new SKPoint(6,6),new SKPoint(6,15),},false);
+             source.MoveTo(17,17);
+             source.LineTo(7,7);
+             source.MoveTo(7,17);
+             source.AddPoly(new SKPoint [] { new SKPoint(7,17),new SKPoint(7,7),new SKPoint(17,7),},false);
              return source;
          });
 
@@ -221,10 +281,10 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> ArrowUpRightInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.MoveTo(6,18);
-             source.LineTo(18,6);
-             source.MoveTo(9,6);
-             source.AddPoly(new SKPoint [] { new SKPoint(9,6),new SKPoint(18,6),new SKPoint(18,15),},false);
+             source.MoveTo(7,17);
+             source.LineTo(17,7);
+             source.MoveTo(7,7);
+             source.AddPoly(new SKPoint [] { new SKPoint(7,7),new SKPoint(17,7),new SKPoint(17,17),},false);
              return source;
          });
 
@@ -232,10 +292,10 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> ArrowUpInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.MoveTo(12,20);
-             source.LineTo(12,4);
-             source.MoveTo(6,10);
-             source.AddPoly(new SKPoint [] { new SKPoint(6,10),new SKPoint(12,4),new SKPoint(18,10),},false);
+             source.MoveTo(12,19);
+             source.LineTo(12,5);
+             source.MoveTo(5,12);
+             source.AddPoly(new SKPoint [] { new SKPoint(5,12),new SKPoint(12,5),new SKPoint(19,12),},false);
              return source;
          });
 
@@ -244,7 +304,7 @@ namespace SkiaSharp.Components
          {
              var source = new SKPath();
              source.AddCircle(12,12,4);
-             source.AddPath(SKPath.ParseSvgPathData("M16 12v1a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"), SKPathAddMode.Append);
+             source.AddPath(SKPath.ParseSvgPathData("M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"), SKPathAddMode.Append);
              return source;
          });
 
@@ -262,9 +322,12 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> BarChart2Instance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddRect(SKRect.Create(10,3,4,18));
-             source.AddRect(SKRect.Create(18,8,4,13));
-             source.AddRect(SKRect.Create(2,13,4,8));
+             source.MoveTo(18,20);
+             source.LineTo(18,10);
+             source.MoveTo(12,20);
+             source.LineTo(12,4);
+             source.MoveTo(6,20);
+             source.LineTo(6,14);
              return source;
          });
 
@@ -272,9 +335,12 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> BarChartInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddRect(SKRect.Create(18,3,4,18));
-             source.AddRect(SKRect.Create(10,8,4,13));
-             source.AddRect(SKRect.Create(2,13,4,8));
+             source.MoveTo(12,20);
+             source.LineTo(12,10);
+             source.MoveTo(18,20);
+             source.LineTo(18,4);
+             source.MoveTo(6,20);
+             source.LineTo(6,16);
              return source;
          });
 
@@ -337,6 +403,15 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath Bold => BoldInstance.Value;
+         private static Lazy<SKPath> BookOpenInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddPath(SKPath.ParseSvgPathData("M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"), SKPathAddMode.Append);
+             source.AddPath(SKPath.ParseSvgPathData("M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"), SKPathAddMode.Append);
+             return source;
+         });
+
+         public static SKPath BookOpen => BookOpenInstance.Value;
          private static Lazy<SKPath> BookInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
@@ -421,9 +496,9 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> CheckCircleInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddPath(SKPath.ParseSvgPathData("M22 11.07V12a10 10 0 1 1-5.93-9.14"), SKPathAddMode.Append);
-             source.MoveTo(23,3);
-             source.AddPoly(new SKPoint [] { new SKPoint(23,3),new SKPoint(12,14),new SKPoint(9,11),},false);
+             source.AddPath(SKPath.ParseSvgPathData("M22 11.08V12a10 10 0 1 1-5.93-9.14"), SKPathAddMode.Append);
+             source.MoveTo(22,4);
+             source.AddPoly(new SKPoint [] { new SKPoint(22,4),new SKPoint(12,14.01F),new SKPoint(9,11.01F),},false);
              return source;
          });
 
@@ -432,7 +507,7 @@ namespace SkiaSharp.Components
          {
              var source = new SKPath();
              source.MoveTo(9,11);
-             source.AddPoly(new SKPoint [] { new SKPoint(9,11),new SKPoint(12,14),new SKPoint(23,3),},false);
+             source.AddPoly(new SKPoint [] { new SKPoint(9,11),new SKPoint(12,14),new SKPoint(22,4),},false);
              source.AddPath(SKPath.ParseSvgPathData("M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"), SKPathAddMode.Append);
              return source;
          });
@@ -564,7 +639,7 @@ namespace SkiaSharp.Components
              var source = new SKPath();
              source.AddCircle(12,12,10);
              source.MoveTo(12,6);
-             source.AddPoly(new SKPoint [] { new SKPoint(12,6),new SKPoint(12,12),new SKPoint(15,15),},false);
+             source.AddPoly(new SKPoint [] { new SKPoint(12,6),new SKPoint(12,12),new SKPoint(16,14),},false);
              return source;
          });
 
@@ -651,6 +726,17 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath Cloud => CloudInstance.Value;
+         private static Lazy<SKPath> CodeInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.MoveTo(16,18);
+             source.AddPoly(new SKPoint [] { new SKPoint(16,18),new SKPoint(22,12),new SKPoint(16,6),},false);
+             source.MoveTo(8,6);
+             source.AddPoly(new SKPoint [] { new SKPoint(8,6),new SKPoint(2,12),new SKPoint(8,18),},false);
+             return source;
+         });
+
+         public static SKPath Code => CodeInstance.Value;
          private static Lazy<SKPath> CodepenInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
@@ -835,6 +921,15 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath Crosshair => CrosshairInstance.Value;
+         private static Lazy<SKPath> DatabaseInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddPath(SKPath.ParseSvgPathData("M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"), SKPathAddMode.Append);
+             source.AddPath(SKPath.ParseSvgPathData("M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"), SKPathAddMode.Append);
+             return source;
+         });
+
+         public static SKPath Database => DatabaseInstance.Value;
          private static Lazy<SKPath> DeleteInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
@@ -856,6 +951,16 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath Disc => DiscInstance.Value;
+         private static Lazy<SKPath> DollarSignInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.MoveTo(12,1);
+             source.LineTo(12,23);
+             source.AddPath(SKPath.ParseSvgPathData("M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"), SKPathAddMode.Append);
+             return source;
+         });
+
+         public static SKPath DollarSign => DollarSignInstance.Value;
          private static Lazy<SKPath> DownloadCloudInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
@@ -871,11 +976,11 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> DownloadInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddPath(SKPath.ParseSvgPathData("M3 17v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"), SKPathAddMode.Append);
-             source.MoveTo(8,12);
-             source.AddPoly(new SKPoint [] { new SKPoint(8,12),new SKPoint(12,16),new SKPoint(16,12),},false);
-             source.MoveTo(12,2);
-             source.LineTo(12,16);
+             source.AddPath(SKPath.ParseSvgPathData("M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"), SKPathAddMode.Append);
+             source.MoveTo(7,10);
+             source.AddPoly(new SKPoint [] { new SKPoint(7,10),new SKPoint(12,15),new SKPoint(17,10),},false);
+             source.MoveTo(12,15);
+             source.LineTo(12,3);
              return source;
          });
 
@@ -1073,6 +1178,28 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath Flag => FlagInstance.Value;
+         private static Lazy<SKPath> FolderMinusInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddPath(SKPath.ParseSvgPathData("M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"), SKPathAddMode.Append);
+             source.MoveTo(9,14);
+             source.LineTo(15,14);
+             return source;
+         });
+
+         public static SKPath FolderMinus => FolderMinusInstance.Value;
+         private static Lazy<SKPath> FolderPlusInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddPath(SKPath.ParseSvgPathData("M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"), SKPathAddMode.Append);
+             source.MoveTo(12,11);
+             source.LineTo(12,17);
+             source.MoveTo(9,14);
+             source.LineTo(15,14);
+             return source;
+         });
+
+         public static SKPath FolderPlus => FolderPlusInstance.Value;
          private static Lazy<SKPath> FolderInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
@@ -1081,6 +1208,66 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath Folder => FolderInstance.Value;
+         private static Lazy<SKPath> GiftInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.MoveTo(20,12);
+             source.AddPoly(new SKPoint [] { new SKPoint(20,12),new SKPoint(20,22),new SKPoint(4,22),new SKPoint(4,12),},false);
+             source.AddRect(SKRect.Create(2,7,20,5));
+             source.MoveTo(12,22);
+             source.LineTo(12,7);
+             source.AddPath(SKPath.ParseSvgPathData("M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"), SKPathAddMode.Append);
+             source.AddPath(SKPath.ParseSvgPathData("M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"), SKPathAddMode.Append);
+             return source;
+         });
+
+         public static SKPath Gift => GiftInstance.Value;
+         private static Lazy<SKPath> GitBranchInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.MoveTo(6,3);
+             source.LineTo(6,15);
+             source.AddCircle(18,6,3);
+             source.AddCircle(6,18,3);
+             source.AddPath(SKPath.ParseSvgPathData("M18 9a9 9 0 0 1-9 9"), SKPathAddMode.Append);
+             return source;
+         });
+
+         public static SKPath GitBranch => GitBranchInstance.Value;
+         private static Lazy<SKPath> GitCommitInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddCircle(12,12,4);
+             source.MoveTo(1.05F,12);
+             source.LineTo(7,12);
+             source.MoveTo(17.01F,12);
+             source.LineTo(22.96F,12);
+             return source;
+         });
+
+         public static SKPath GitCommit => GitCommitInstance.Value;
+         private static Lazy<SKPath> GitMergeInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddCircle(18,18,3);
+             source.AddCircle(6,6,3);
+             source.AddPath(SKPath.ParseSvgPathData("M6 21V9a9 9 0 0 0 9 9"), SKPathAddMode.Append);
+             return source;
+         });
+
+         public static SKPath GitMerge => GitMergeInstance.Value;
+         private static Lazy<SKPath> GitPullRequestInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddCircle(18,18,3);
+             source.AddCircle(6,6,3);
+             source.AddPath(SKPath.ParseSvgPathData("M13 6h3a2 2 0 0 1 2 2v7"), SKPathAddMode.Append);
+             source.MoveTo(6,9);
+             source.LineTo(6,21);
+             return source;
+         });
+
+         public static SKPath GitPullRequest => GitPullRequestInstance.Value;
          private static Lazy<SKPath> GithubInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
@@ -1119,6 +1306,20 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath Grid => GridInstance.Value;
+         private static Lazy<SKPath> HardDriveInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.MoveTo(22,12);
+             source.LineTo(2,12);
+             source.AddPath(SKPath.ParseSvgPathData("M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"), SKPathAddMode.Append);
+             source.MoveTo(6,16);
+             source.LineTo(6,16);
+             source.MoveTo(10,16);
+             source.LineTo(10,16);
+             return source;
+         });
+
+         public static SKPath HardDrive => HardDriveInstance.Value;
          private static Lazy<SKPath> HashInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
@@ -1154,8 +1355,8 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> HelpCircleInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddPath(SKPath.ParseSvgPathData("M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"), SKPathAddMode.Append);
              source.AddCircle(12,12,10);
+             source.AddPath(SKPath.ParseSvgPathData("M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"), SKPathAddMode.Append);
              source.MoveTo(12,17);
              source.LineTo(12,17);
              return source;
@@ -1186,9 +1387,9 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> InboxInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.MoveTo(22,13);
-             source.AddPoly(new SKPoint [] { new SKPoint(22,13),new SKPoint(16,13),new SKPoint(14,16),new SKPoint(10,16),new SKPoint(8,13),new SKPoint(2,13),},false);
-             source.AddPath(SKPath.ParseSvgPathData("M5.47 5.19L2 13v5a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5l-3.47-7.81A2 2 0 0 0 16.7 4H7.3a2 2 0 0 0-1.83 1.19z"), SKPathAddMode.Append);
+             source.MoveTo(22,12);
+             source.AddPoly(new SKPoint [] { new SKPoint(22,12),new SKPoint(16,12),new SKPoint(14,15),new SKPoint(10,15),new SKPoint(8,12),new SKPoint(2,12),},false);
+             source.AddPath(SKPath.ParseSvgPathData("M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"), SKPathAddMode.Append);
              return source;
          });
 
@@ -1292,6 +1493,16 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath Link => LinkInstance.Value;
+         private static Lazy<SKPath> LinkedinInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddPath(SKPath.ParseSvgPathData("M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"), SKPathAddMode.Append);
+             source.AddRect(SKRect.Create(2,9,4,12));
+             source.AddCircle(4,4,2);
+             return source;
+         });
+
+         public static SKPath Linkedin => LinkedinInstance.Value;
          private static Lazy<SKPath> ListInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
@@ -1346,9 +1557,9 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> LogInInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddPath(SKPath.ParseSvgPathData("M14 22h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-5"), SKPathAddMode.Append);
-             source.MoveTo(11,16);
-             source.AddPoly(new SKPoint [] { new SKPoint(11,16),new SKPoint(15,12),new SKPoint(11,8),},false);
+             source.AddPath(SKPath.ParseSvgPathData("M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"), SKPathAddMode.Append);
+             source.MoveTo(10,17);
+             source.AddPoly(new SKPoint [] { new SKPoint(10,17),new SKPoint(15,12),new SKPoint(10,7),},false);
              source.MoveTo(15,12);
              source.LineTo(3,12);
              return source;
@@ -1358,9 +1569,9 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> LogOutInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddPath(SKPath.ParseSvgPathData("M10 22H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h5"), SKPathAddMode.Append);
-             source.MoveTo(17,16);
-             source.AddPoly(new SKPoint [] { new SKPoint(17,16),new SKPoint(21,12),new SKPoint(17,8),},false);
+             source.AddPath(SKPath.ParseSvgPathData("M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"), SKPathAddMode.Append);
+             source.MoveTo(16,17);
+             source.AddPoly(new SKPoint [] { new SKPoint(16,17),new SKPoint(21,12),new SKPoint(16,7),},false);
              source.MoveTo(21,12);
              source.LineTo(9,12);
              return source;
@@ -1554,9 +1765,9 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> MoreHorizontalInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddCircle(12,12,2);
-             source.AddCircle(20,12,2);
-             source.AddCircle(4,12,2);
+             source.AddCircle(12,12,1);
+             source.AddCircle(19,12,1);
+             source.AddCircle(5,12,1);
              return source;
          });
 
@@ -1564,9 +1775,9 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> MoreVerticalInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddCircle(12,12,2);
-             source.AddCircle(12,4,2);
-             source.AddCircle(12,20,2);
+             source.AddCircle(12,12,1);
+             source.AddCircle(12,5,1);
+             source.AddCircle(12,19,1);
              return source;
          });
 
@@ -1926,6 +2137,16 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath RotateCw => RotateCwInstance.Value;
+         private static Lazy<SKPath> RssInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddPath(SKPath.ParseSvgPathData("M4 11a9 9 0 0 1 9 9"), SKPathAddMode.Append);
+             source.AddPath(SKPath.ParseSvgPathData("M4 4a16 16 0 0 1 16 16"), SKPathAddMode.Append);
+             source.AddCircle(5,19,1);
+             return source;
+         });
+
+         public static SKPath Rss => RssInstance.Value;
          private static Lazy<SKPath> SaveInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
@@ -1956,13 +2177,24 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> SearchInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddCircle(10.5F,10.5F,7.5F);
+             source.AddCircle(11,11,8);
              source.MoveTo(21,21);
-             source.LineTo(15.8F,15.8F);
+             source.LineTo(16.65F,16.65F);
              return source;
          });
 
          public static SKPath Search => SearchInstance.Value;
+         private static Lazy<SKPath> SendInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.MoveTo(22,2);
+             source.LineTo(11,13);
+             source.MoveTo(22,2);
+             source.AddPoly(new SKPoint [] { new SKPoint(22,2),new SKPoint(15,22),new SKPoint(11,13),new SKPoint(2,9),new SKPoint(22,2),},true);
+             return source;
+         });
+
+         public static SKPath Send => SendInstance.Value;
          private static Lazy<SKPath> ServerInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
@@ -2011,20 +2243,42 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath Share => ShareInstance.Value;
+         private static Lazy<SKPath> ShieldOffInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddPath(SKPath.ParseSvgPathData("M19.69 14a6.9 6.9 0 0 0 .31-2V5l-8-3-3.16 1.18"), SKPathAddMode.Append);
+             source.AddPath(SKPath.ParseSvgPathData("M4.73 4.73L4 5v7c0 6 8 10 8 10a20.29 20.29 0 0 0 5.62-4.38"), SKPathAddMode.Append);
+             source.MoveTo(1,1);
+             source.LineTo(23,23);
+             return source;
+         });
+
+         public static SKPath ShieldOff => ShieldOffInstance.Value;
          private static Lazy<SKPath> ShieldInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddPath(SKPath.ParseSvgPathData("M12 22s8-4 8-10V4l-8-2-8 2v8c0 6 8 10 8 10z"), SKPathAddMode.Append);
+             source.AddPath(SKPath.ParseSvgPathData("M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"), SKPathAddMode.Append);
              return source;
          });
 
          public static SKPath Shield => ShieldInstance.Value;
+         private static Lazy<SKPath> ShoppingBagInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddPath(SKPath.ParseSvgPathData("M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"), SKPathAddMode.Append);
+             source.MoveTo(3,6);
+             source.LineTo(21,6);
+             source.AddPath(SKPath.ParseSvgPathData("M16 10a4 4 0 0 1-8 0"), SKPathAddMode.Append);
+             return source;
+         });
+
+         public static SKPath ShoppingBag => ShoppingBagInstance.Value;
          private static Lazy<SKPath> ShoppingCartInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddCircle(8,21,2);
-             source.AddCircle(20,21,2);
-             source.AddPath(SKPath.ParseSvgPathData("M5.67 6H23l-1.68 8.39a2 2 0 0 1-2 1.61H8.75a2 2 0 0 1-2-1.74L5.23 2.74A2 2 0 0 0 3.25 1H1"), SKPathAddMode.Append);
+             source.AddCircle(9,21,1);
+             source.AddCircle(20,21,1);
+             source.AddPath(SKPath.ParseSvgPathData("M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"), SKPathAddMode.Append);
              return source;
          });
 
@@ -2274,6 +2528,17 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath Target => TargetInstance.Value;
+         private static Lazy<SKPath> TerminalInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.MoveTo(4,17);
+             source.AddPoly(new SKPoint [] { new SKPoint(4,17),new SKPoint(10,11),new SKPoint(4,5),},false);
+             source.MoveTo(12,19);
+             source.LineTo(20,19);
+             return source;
+         });
+
+         public static SKPath Terminal => TerminalInstance.Value;
          private static Lazy<SKPath> ThermometerInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
@@ -2370,6 +2635,18 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath Triangle => TriangleInstance.Value;
+         private static Lazy<SKPath> TruckInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddRect(SKRect.Create(1,3,15,13));
+             source.MoveTo(16,8);
+             source.AddPoly(new SKPoint [] { new SKPoint(16,8),new SKPoint(20,8),new SKPoint(23,11),new SKPoint(23,16),new SKPoint(16,16),new SKPoint(16,8),},true);
+             source.AddCircle(5.5F,18.5F,2.5F);
+             source.AddCircle(18.5F,18.5F,2.5F);
+             return source;
+         });
+
+         public static SKPath Truck => TruckInstance.Value;
          private static Lazy<SKPath> TvInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
@@ -2445,11 +2722,11 @@ namespace SkiaSharp.Components
          private static Lazy<SKPath> UploadInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();
-             source.AddPath(SKPath.ParseSvgPathData("M3 17v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"), SKPathAddMode.Append);
-             source.MoveTo(16,6);
-             source.AddPoly(new SKPoint [] { new SKPoint(16,6),new SKPoint(12,2),new SKPoint(8,6),},false);
-             source.MoveTo(12,2);
-             source.LineTo(12,16);
+             source.AddPath(SKPath.ParseSvgPathData("M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"), SKPathAddMode.Append);
+             source.MoveTo(17,8);
+             source.AddPoly(new SKPoint [] { new SKPoint(17,8),new SKPoint(12,3),new SKPoint(7,8),},false);
+             source.MoveTo(12,3);
+             source.LineTo(12,15);
              return source;
          });
 
@@ -2677,6 +2954,31 @@ namespace SkiaSharp.Components
          });
 
          public static SKPath X => XInstance.Value;
+         private static Lazy<SKPath> YoutubeInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.AddPath(SKPath.ParseSvgPathData("M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"), SKPathAddMode.Append);
+             source.MoveTo(9.75F,15.02F);
+             source.AddPoly(new SKPoint [] { new SKPoint(9.75F,15.02F),new SKPoint(15.5F,11.75F),new SKPoint(9.75F,8.48F),new SKPoint(9.75F,15.02F),},true);
+             return source;
+         });
+
+         public static SKPath Youtube => YoutubeInstance.Value;
+         private static Lazy<SKPath> ZapOffInstance = new Lazy<SKPath>(() =>
+         {
+             var source = new SKPath();
+             source.MoveTo(12.41F,6.75F);
+             source.AddPoly(new SKPoint [] { new SKPoint(12.41F,6.75F),new SKPoint(13,2),new SKPoint(10.57F,4.92F),},false);
+             source.MoveTo(18.57F,12.91F);
+             source.AddPoly(new SKPoint [] { new SKPoint(18.57F,12.91F),new SKPoint(21,10),new SKPoint(15.66F,10),},false);
+             source.MoveTo(8,8);
+             source.AddPoly(new SKPoint [] { new SKPoint(8,8),new SKPoint(3,14),new SKPoint(12,14),new SKPoint(11,22),new SKPoint(16,16),},false);
+             source.MoveTo(1,1);
+             source.LineTo(23,23);
+             return source;
+         });
+
+         public static SKPath ZapOff => ZapOffInstance.Value;
          private static Lazy<SKPath> ZapInstance = new Lazy<SKPath>(() =>
          {
              var source = new SKPath();

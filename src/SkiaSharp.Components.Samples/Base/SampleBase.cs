@@ -38,7 +38,7 @@ namespace SkiaSharp.Components.Samples
                     },
                     new Span
                     {
-                        ForegroundBrush = new ColorBrush(new SKColor(0xFFF44336)),
+                        Foreground = new ColorBrush(new SKColor(0xFFF44336)),
                         Decorations = TextDecoration.Bold,
                         Text = "id ornare tortor convallis sed"
                     },
@@ -55,11 +55,7 @@ namespace SkiaSharp.Components.Samples
                 new Tuple<float, SKColor>(1, new SKColor(238,238,238,255)),
             });
 
-            var shadow = new Shadow()
-            {
-                Blur = new SKPoint(10, 10),
-                Color = SKColors.Black.WithAlpha(80),
-            };
+            var shadow = new Shadow(SKPoint.Empty, new SKPoint(10, 10), SKColors.Black.WithAlpha(80));
 
             this.Image = new Image()
             {
@@ -86,11 +82,7 @@ namespace SkiaSharp.Components.Samples
             {
                 Source = IconPath.Aperture,
                 ViewBox = SKRect.Create(0, 0, 24, 24),
-                Stroke = new Stroke()
-                {
-                    Size = 5,
-                    Brush = iconGradient,
-                },
+                Stroke = new Stroke(3, iconGradient, StrokeStyle.Line),
             };
         }
 

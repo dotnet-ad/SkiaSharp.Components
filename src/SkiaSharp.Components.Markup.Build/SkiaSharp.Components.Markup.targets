@@ -1,0 +1,40 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <UsingTask TaskName="SkiaSharp.Components.Markup.Build.SkmlTask" AssemblyFile="SkiaSharp.Components.Markup.Build.dll"/>
+
+   <Target Name="CollectSkss" BeforeTargets="CollectSkml">
+    <ItemGroup>
+     <SkssFiles Include="@(None)" Condition="'%(Extension)' == '.skss'" />
+    </ItemGroup>
+    <PropertyGroup>
+        <SkssFiles>@(SkssFiles)</SkssFiles>
+    </PropertyGroup>
+   </Target>
+    
+  <Target Name="CollectSkml" BeforeTargets="Skml">
+    <ItemGroup>
+     <SkmlFiles Include="@(None)" Condition="'%(Extension)' == '.skml'">
+        <Stylesheets>$(SkssFiles)</Stylesheets>
+     </SkmlFiles>
+    </ItemGroup>
+    <Message Text="SKML: @(SkmlFiles)" />  
+  </Target>
+    
+  <Target Name="Skml" BeforeTargets="CollectGeneratedSkml">
+    <Message Text="Starting SKML generation ..." Importance="normal"/>
+    <Message Text="SKML: @(SkmlFiles)" />
+
+    <SkmlTask
+        Source="@(SkmlFiles)"
+        AssemblyName = "$(AssemblyName)"
+        OutputFile = "$(IntermediateOutputPath)%(Identity).g.cs">
+    </SkmlTask>
+  </Target>
+
+  <Target Name="CollectGeneratedSkml" BeforeTargets="BeforeBuild">
+      <ItemGroup>
+        <Compile Include="$(IntermediateOutputPath)**\*.skml.g.cs" />
+      </ItemGroup>
+  </Target>
+    
+</Project>

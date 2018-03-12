@@ -4,7 +4,7 @@
     {
         public Span()
         {
-            this.ForegroundBrush = new ColorBrush(SKColors.Black);
+            this.Foreground = new ColorBrush(SKColors.Black);
             this.TextSize = 12;
             this.Decorations = TextDecoration.None;
         }
@@ -12,7 +12,7 @@
         public Span(Span source)
         {
             this.Text = source.Text;
-            this.ForegroundBrush = source.ForegroundBrush;
+            this.Foreground = source.Foreground;
             this.TextSize = source.TextSize;
             this.Typeface = source.Typeface;
             this.Decorations = source.Decorations;
@@ -20,7 +20,7 @@
 
         public string Text { get; set; }
 
-        public IBrush ForegroundBrush { get; set; }
+        public IBrush Foreground { get; set; }
 
         public float TextSize { get; set; }
 

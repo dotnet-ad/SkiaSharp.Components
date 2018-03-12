@@ -1,22 +1,56 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
+
 namespace SkiaSharp.Components
 {
-    public class ViewNodeParser<TView> : NodeParser where TView : View
+    public class ViewNodeParser : NodeParser 
     {
-        public ViewNodeParser(string name = null) : base(name ?? typeof(TView).Name)
-        {
+        private Type viewType;
 
+        public ViewNodeParser(Type t) : base(t.Name)
+        {
+            this.viewType = t;
+            var properties = t.GetProperties();
+
+            foreach (var property in properties)
+            {
+                var propertyName = ToSeparatorCase(property.Name);
+              
+                this.WithStyle(propertyName, property.PropertyType, (n, v) =>
+                {
+                    property.SetValue(n.Data, v);
+                });
+            }
+        }
+
+        public static string ToSeparatorCase(string value)
+        {
+            var b = new StringBuilder();
+            for (int i = 0; i < value.Length; i++)
+            {
+                var c = value.ElementAt(i);
+                if (char.IsUpper(c))
+                {
+                    if (i > 0)
+                    {
+                        b.Append("-");
+                    }
+
+                    b.Append($"{c}".ToLowerInvariant());
+                }
+                else
+                {
+                    b.Append(c);
+                }
+            }
+
+            return b.ToString();
         }
 
         public override View CreateView()
         {
-            return Activator.CreateInstance<TView>();
-        }
-
-        public ViewNodeParser<TView> WithStyle<T>(string name, Action<Flex.Node, TView, T> setter)
-        {
-            base.WithStyle<T>(name, (n, v) => setter(n, n.Data as TView, v));
-            return this;
+            return (View)Activator.CreateInstance(viewType);
         }
     }
 }

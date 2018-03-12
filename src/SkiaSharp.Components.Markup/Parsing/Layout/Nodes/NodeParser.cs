@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using Facebook.Yoga;
 
 namespace SkiaSharp.Components
 {
@@ -12,7 +13,9 @@ namespace SkiaSharp.Components
             this.Name = name;
 
             //TODO add all flex properties
-            this.WithStyle<float>("flex", (n,v) => n.Flex = v);
+            this.WithStyle<float>("flex", (n,v) => n.FlexValue = v);
+            this.WithStyle<YogaAlign>("align-items", (n, v) => n.AlignItems = v);
+            this.WithStyle<YogaAlign>("align-self", (n, v) => n.AlignSelf = v);
             this.WithStyle<float>("width", (n, v) => n.Width = v);
             this.WithStyle<float>("height", (n, v) => n.Height = v);
             this.WithStyle<Margin>("margin", (n, v) =>
@@ -47,7 +50,12 @@ namespace SkiaSharp.Components
 
         public NodeParser WithStyle<T>(string name, Action<Flex.Node,T> setter)
         {
-            this.styleProperties[name] = new PropertyParser(name, typeof(T), (n,v) => setter(n,(T)v));
+            return this.WithStyle(name, typeof(T), (n,t) => setter(n, (T)t));
+        }
+
+        public NodeParser WithStyle(string name, Type type, Action<Flex.Node, object> setter)
+        {
+            this.styleProperties[name] = new PropertyParser(name, type, setter);
             return this;
         }
 

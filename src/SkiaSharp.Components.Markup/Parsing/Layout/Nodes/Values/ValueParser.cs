@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace SkiaSharp.Components
 {
@@ -9,6 +10,31 @@ namespace SkiaSharp.Components
         public T Parse<T>(string value)
         {
             return (T)this.Parse(typeof(T), value);
+        }
+
+        public static string ToCamelCase(string value)
+        {
+            var b = new StringBuilder();
+            for (int i = 0; i < value.Length; i++)
+            {
+                var c = value.ElementAt(i);
+                if(i == 0)
+                {
+                    b.Append($"{c}".ToUpperInvariant());
+                }
+                else if (i == '-' && i < value.Length - 1)
+                {
+                    c = value.ElementAt(i+1);
+                    b.Append($"{c}".ToUpperInvariant());
+                    i++;
+                }
+                else
+                {
+                    b.Append(c);
+                }
+            }
+
+            return b.ToString();
         }
 
         public object Parse(Type type, string value)
@@ -71,13 +97,11 @@ namespace SkiaSharp.Components
                 var values = value.Split(',')
                                   .Select(x => x.Trim())
                                   .ToArray();
-                
-                return new Stroke
-                {
-                    Size = this.Parse<float>(values.ElementAtOrDefault(0) ?? "0"),
-                    Brush = this.Parse<IBrush>(values.ElementAtOrDefault(1) ?? "#FFFFFFFF"),
-                    Style = this.Parse<StrokeStyle>(values.ElementAtOrDefault(2) ?? "Line"),
-                };
+
+                var size = this.Parse<float>(values.ElementAtOrDefault(0) ?? "0");
+                var brush = this.Parse<IBrush>(values.ElementAtOrDefault(1) ?? "#FFFFFFFF");
+                var style = this.Parse<StrokeStyle>(values.ElementAtOrDefault(2) ?? "Line");
+                return new Stroke(size, brush, style);
             }
 
             if (type == typeof(Shadow))
@@ -92,12 +116,7 @@ namespace SkiaSharp.Components
                 var by = this.Parse<float>(values.ElementAtOrDefault(3) ?? "0");
                 var color = this.Parse<SKColor>(values.ElementAtOrDefault(4) ?? "#33000000");
 
-                return new Shadow
-                {
-                    Offset = new SKPoint(x,y),
-                    Blur = new SKPoint(bx,by),
-                    Color = color,
-                };
+                return new Shadow(new SKPoint(x, y), new SKPoint(bx, by), color);
             }
 
             if (type == typeof(SKPath))
@@ -108,7 +127,7 @@ namespace SkiaSharp.Components
 
             if (type.GetTypeInfo().IsEnum)
             {
-                return Enum.Parse(type, value);
+                return Enum.Parse(type, ToCamelCase(value));
             }
 
             throw new InvalidOperationException($"Failed to parse style value '{value}'");

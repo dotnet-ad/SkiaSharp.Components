@@ -25,9 +25,8 @@ namespace SkiaSharp.Components.Samples.iOS
             //this.View = renderer;
 
             // Markup
-            var view = new MarkupSample();
             var renderer = new Renderer();
-            renderer.View = view.Build();
+            renderer.View = new Test.Sample();
             this.View = renderer;
         }
     }
