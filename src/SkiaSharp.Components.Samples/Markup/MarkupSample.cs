@@ -38,8 +38,12 @@ namespace SkiaSharp.Components.Samples
             var result = Layout("Sample.skml", stylesheet);
 
             var description = result.Root.Find<Label>("description");
+            var title = result.Root.Find<Label>("title");
+            var icon = result.Root.Find<Path>("icon");
 
-            description.Text = "Hello world!";
+            title.Text = "Hello world!";
+            description.Text = "Praesent elementum vestibulum erat. Aliquam malesuada mi sed quam eleifend, id fringilla urna porttitor. Aenean nec neque interdum, volutpat sapien at, dignissim est.";
+            icon.Source = IconPath.Aperture;
 
             return result;
         }
