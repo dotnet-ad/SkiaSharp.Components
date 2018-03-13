@@ -52,7 +52,7 @@ namespace SkiaSharp.Components
             }
         }
 
-        public void Stroke(SKCanvas canvas, SKPath path, float size, StrokeStyle style)
+        public void Stroke(SKCanvas canvas, SKPath path, float size, StrokeStyle style, SKStrokeCap cap, SKStrokeJoin join)
         {
             throw new NotImplementedException();
         }

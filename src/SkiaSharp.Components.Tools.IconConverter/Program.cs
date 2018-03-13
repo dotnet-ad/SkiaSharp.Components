@@ -42,8 +42,10 @@ namespace SkiaSharp.Components.Tools.IconConverter
 
             builder.AppendLine("namespace SkiaSharp.Components");
             builder.AppendLine("{");
-            builder.AppendLine("    public static class IconPath");
+            builder.AppendLine("    public static class Icons");
             builder.AppendLine("    {");
+
+            string cap = "Round", join = "Round";
 
             using(var stream = File.OpenRead(LocalZipUri))
             using(var archive = new ZipArchive(stream, ZipArchiveMode.Read))
@@ -55,7 +57,7 @@ namespace SkiaSharp.Components.Tools.IconConverter
 
                         var iconName = string.Join("",Path.GetFileNameWithoutExtension(entry.FullName).Split('-').Select(x => x.Substring(0,1).ToUpper() + x.Substring(1)));
 
-                        builder.AppendLine($"         private static Lazy<SKPath> {iconName}Instance = new Lazy<SKPath>(() =>");
+                        builder.AppendLine($"         private static Lazy<Icon> {iconName}Instance = new Lazy<Icon>(() =>");
                         builder.AppendLine("         {");
                         builder.AppendLine("             var source = new SKPath();");
 
@@ -118,20 +120,67 @@ namespace SkiaSharp.Components.Tools.IconConverter
                                     builder.Append($"SKPath.ParseSvgPathData(\"{element.Attribute("d").Value}\")");
                                     builder.AppendLine(", SKPathAddMode.Append);");
                                 }
-                            }
-                        }
 
-                        builder.AppendLine("             return source;");
-                        builder.AppendLine("         });");
-                        builder.AppendLine($"\n         public static SKPath {iconName} => {iconName}Instance.Value;");
+
+                                if (name == "line")
+                                {
+                                    var x1 = FormatFloat(element.Attribute("x1").Value);
+                                    var y1 = FormatFloat(element.Attribute("y1").Value);
+                                    var x2 = FormatFloat(element.Attribute("x2").Value);
+                                    var y2 = FormatFloat(element.Attribute("y2").Value);
+                                    builder.AppendLine($"{source}.MoveTo({x1},{y1});");
+                                    builder.AppendLine($"{source}.LineTo({x2},{y2});");
+                                }
+                            }
+
+                            switch(xml.Root.Attribute("stroke-linecap")?.Value)
+                            {
+                                case null:
+                                    cap = "Round";
+                                    break;
+
+                                case "round":
+                                    cap = "Round";
+                                    break;
+
+                                case "butt":
+                                    cap = "Butt";
+                                    break;
+
+                                case "square":
+                                    cap = "Square";
+                                    break;
+                            }
+
+                            switch (xml.Root.Attribute("stroke-linejoin")?.Value)
+                            {
+                                case null:
+                                    join = "Round";
+                                    break;
+
+                                case "miter":
+                                    join = "Miter";
+                                    break;
+
+                                case "bevel":
+                                    join = "Bevel";
+                                    break;
+                            }
+
+                            builder.AppendLine($"             return new Icon(source, SKStrokeCap.{cap}, SKStrokeJoin.{join});");
+                            builder.AppendLine("         });");
+                            builder.AppendLine($"\n         public static Icon {iconName} => {iconName}Instance.Value;");
+                        }
                     }
                 } 
+
+                
 
                 builder.AppendLine("    }");
                 builder.AppendLine("}");
             }
 
-            File.WriteAllText("../../../SkiaSharp.Components/Base/IconPath.cs", builder.ToString());
+            File.WriteAllText("../../../SkiaSharp.Components/Base/Icons.cs", builder.ToString());
 
             Console.WriteLine(builder.ToString());
         }

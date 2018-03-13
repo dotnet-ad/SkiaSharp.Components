@@ -46,11 +46,13 @@ namespace SkiaSharp.Components
             }
         }
 
-        public void Stroke(SKCanvas canvas, SKPath path, float size, StrokeStyle style)
+        public void Stroke(SKCanvas canvas, SKPath path, float size, StrokeStyle style, SKStrokeCap cap, SKStrokeJoin join)
         {
             using (var paint = this.CreatePaint(path))
             {
                 paint.StrokeWidth = size;
+                paint.StrokeCap = cap;
+                paint.StrokeJoin = join;
                 paint.Style = SKPaintStyle.Stroke;
                 canvas.DrawPath(path, paint);
             }

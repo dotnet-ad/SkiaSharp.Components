@@ -80,9 +80,9 @@ namespace SkiaSharp.Components.Samples
 
             this.Icon = new Path
             {
-                Source = IconPath.Aperture,
+                Source = Icons.Aperture.Path,
                 ViewBox = SKRect.Create(0, 0, 24, 24),
-                Stroke = new Stroke(3, iconGradient, StrokeStyle.Line),
+                Stroke = new Stroke(3, iconGradient, StrokeStyle.Line, Icons.Aperture.Cap, Icons.Aperture.Join),
             };
         }
 

@@ -101,7 +101,9 @@ namespace SkiaSharp.Components
                 var size = this.Parse<float>(values.ElementAtOrDefault(0) ?? "0");
                 var brush = this.Parse<IBrush>(values.ElementAtOrDefault(1) ?? "#FFFFFFFF");
                 var style = this.Parse<StrokeStyle>(values.ElementAtOrDefault(2) ?? "Line");
-                return new Stroke(size, brush, style);
+                var cap = this.Parse<SKStrokeCap>(values.ElementAtOrDefault(3) ?? "Round");
+                var join = this.Parse<SKStrokeJoin>(values.ElementAtOrDefault(4) ?? "Round");
+                return new Stroke(size, brush, style, cap, join);
             }
 
             if (type == typeof(Shadow))

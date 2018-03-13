@@ -6,6 +6,6 @@
 
         void Fill(SKCanvas canvas, SKPath path);
 
-        void Stroke(SKCanvas canvas, SKPath path, float size, StrokeStyle style);
+        void Stroke(SKCanvas canvas, SKPath path, float size, StrokeStyle style, SKStrokeCap cap, SKStrokeJoin join);
     }
 }
