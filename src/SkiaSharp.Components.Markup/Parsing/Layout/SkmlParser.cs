@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Facebook.Yoga;
 using System;
 using System.Linq;
+using System.IO;
 
 namespace SkiaSharp.Components
 {
@@ -23,13 +24,30 @@ namespace SkiaSharp.Components
 
         public NodeParser AddNode(NodeParser p) => nodes[p.Name] = p;
 
+        private Layout layout;
+
         public Layout Parse(Layout layout)
         {
+            this.layout = layout;
+
             var name = layout.Content.Root?.Attribute("Class")?.Value;
 
-            var stylesheet = new Stylesheet();
+            // Loading all stylesheets
+            var skssParser = new SkssParser();
+            var folder = System.IO.Path.GetDirectoryName(this.layout.Path);
+            var stylesheetsNames = layout.Content.Root.Attribute("Stylesheets")?.Value?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) ?? new string[] { };
+            var stylesheets = stylesheetsNames.Select(x => System.IO.Path.Combine(folder, x))
+                                              .Select(x =>
+                                              {
+                                                  using (var skssStream = File.OpenRead(x))
+                                                  {
+                                                      return skssParser.Parse(skssStream);
+                                                  }
+                                              }).ToArray();
 
-            foreach (var s in layout.Stylesheets)
+            // Merging stylesheets
+            var stylesheet = new Stylesheet();
+            foreach (var s in stylesheets)
             {
                 stylesheet = stylesheet.Merge(s);
             }
@@ -41,7 +59,6 @@ namespace SkiaSharp.Components
 
             return new Layout()
             {
-                Stylesheets = layout.Stylesheets,
                 Class = name,
                 View = view,
             };
@@ -49,6 +66,22 @@ namespace SkiaSharp.Components
 
         private Flex.Node ParseNode(XElement element, Stylesheet stylesheet)
         {
+            if(element.Name == "Include")
+            {
+                var path = element.Attribute("Source")?.Value;
+                var folder = System.IO.Path.GetDirectoryName(this.layout.Path);
+                var includePath = System.IO.Path.Combine(folder, path);
+                var includeLayout = new Layout
+                {
+                    Path = includePath,
+                    Content = XDocument.Load(includePath),
+                };
+
+                var includeParser = new SkmlParser();
+                var included = includeParser.Parse(includeLayout);
+                return included.View.Root;
+            }
+
             NodeParser node;
 
             if(!this.nodes.TryGetValue(element.Name.ToString(), out node))

@@ -11,7 +11,7 @@ namespace SkiaSharp.Components
 
         private Shadow shadow;
 
-        private float cornderRadius;
+        private float cornerRadius;
 
         #endregion
 
@@ -19,8 +19,8 @@ namespace SkiaSharp.Components
 
         public float CornerRadius
         {
-            get => this.cornderRadius;
-            set => this.SetAndInvalidate(ref this.cornderRadius, value);
+            get => this.cornerRadius;
+            set => this.SetAndInvalidate(ref this.cornerRadius, value);
         }
 
         public IBrush Fill

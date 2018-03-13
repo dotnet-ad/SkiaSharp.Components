@@ -7,9 +7,7 @@
                 <Label Name="subtitle" Style="text-size:12;foreground:#FF666666;" />
             </Column>
         </Row>
-        <Box Class="box-shadow" Style="margin:20">
-            <Label Name="description" Style="foreground:#66778899;text-size:11" />
-        </Box>
-        <Box Style="flex:1;fill:#FF899067;corner-radius:5" />
+        <Include Source="Included.skml" />
+        <Image Name="image" Style="flex:1;fill:#FFEEEEEE;corner-radius:5;height:150" />
     </Column>
 </Layout>

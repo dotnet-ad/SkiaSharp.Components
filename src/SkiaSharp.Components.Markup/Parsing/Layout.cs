@@ -7,9 +7,9 @@ namespace SkiaSharp.Components
     {
         public string Class { get; set; }
 
-        public XDocument Content { get; set; }
+        public string Path { get; set; }
 
-        public List<Stylesheet> Stylesheets { get; set; } = new List<Stylesheet>();
+        public XDocument Content { get; set; }
 
         public Flex View { get; set; }
     }

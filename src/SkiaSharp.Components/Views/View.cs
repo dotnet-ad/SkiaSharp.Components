@@ -17,6 +17,10 @@ namespace SkiaSharp.Components
 
         public virtual SKRect LayoutFrame { get; set; }
 
+        public bool IsInvalidated { get; private set; }
+
+        public bool NeedsLayout { get; set; } = true;
+
         #region Events
 
         public event EventHandler Invalidated;
@@ -24,8 +28,6 @@ namespace SkiaSharp.Components
         #endregion
 
         #region Fields
-
-        private bool isInvalidated;
 
         private SKRect lastLayout;
 
@@ -47,15 +49,17 @@ namespace SkiaSharp.Components
         public virtual void Layout(SKRect available)
         {
             this.LayoutFrame = available;
+            this.NeedsLayout = false;
         }
 
         public virtual bool LayoutIfNeeded(SKRect available)
         {
-            if(lastLayout != available)
+            if(lastLayout != available || this.NeedsLayout)
             {
                 Debug.WriteLine($"[{this.GetType().Name}:{this.Name}] Layout in {available}");
                 this.Layout(available);
                 this.lastLayout = available;
+                this.Invalidate();
                 return true;
             }
 
@@ -66,9 +70,9 @@ namespace SkiaSharp.Components
 
         public async void Invalidate()
         {
-            if (!this.isInvalidated)
+            if (!this.IsInvalidated)
             {
-                this.isInvalidated = true;
+                this.IsInvalidated = true;
                 await Task.Delay(InvalidateTrottle);
 
                 this.Invalidated?.Invoke(this, EventArgs.Empty);
@@ -81,7 +85,7 @@ namespace SkiaSharp.Components
                 if (root != null && root != this)
                     root.Invalidate();
 
-                this.isInvalidated = false;
+                this.IsInvalidated = false;
             }
         }
 

@@ -21,12 +21,12 @@ namespace SkiaSharp.Components.Samples.iOS
             //this.View = renderer;
 
             // Builder
-            //var renderer = new BuilderRenderer(new BuilderSample());
-            //this.View = renderer;
+            var renderer = new BuilderRenderer(new BuilderSample());
 
             // Markup
-            var renderer = new Renderer();
-            renderer.View = new Test.Sample();
+            //var renderer = new Renderer();
+            //renderer.View = new Test.Sample(BuilderSample.Items[0]);
+
             this.View = renderer;
         }
     }

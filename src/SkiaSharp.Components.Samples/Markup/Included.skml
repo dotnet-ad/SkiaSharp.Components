@@ -1,0 +1,5 @@
+﻿<Layout Class="Test.Included" Stylesheets="Sample.skss">
+    <Box Class="box-shadow" Style="margin:20">
+        <Label Name="description" Style="foreground:#66778899;text-size:11" />
+    </Box>
+</Layout>
