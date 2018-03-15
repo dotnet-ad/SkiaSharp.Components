@@ -44,7 +44,9 @@
                     };
 
                     this.Log.LogMessage("Parsing file: {0}", source.ItemSpec);
-                    var flex = parser.Parse(layout);
+                    var flexTask = parser.ParseAsync(layout);
+                    flexTask.Wait();
+                    var flex = flexTask.Result;
 
                     // Generate C#
                     this.Log.LogMessage("Generating C#: {0}, {1}", output, flex.Class);

@@ -35,26 +35,52 @@ namespace SkiaSharp.Components
                 this.AppendLine($"using System;");
                 this.AppendLine($"using SkiaSharp;");
                 this.AppendLine($"using SkiaSharp.Components;");
-
+                this.AppendLine($"using SkiaSharp.Components.Markup;");
 
                 // Class
                 this.AppendLine($"public partial class {className} : Flex");
                 this.Body(() =>
                 {
-                    var members = new List<string>();
+                    var members = new List<Tuple<string,string>>();
 
-                    this.AppendLine($"private void Initialize()");
+                    this.AppendLine($"private void Load()");
                     this.Body(() =>
                     {
+                        this.AppendLine($"this.Name = \"{layout.Path}\";");
+
                         var root = this.Generate(layout.View.Root, members);
-                        this.AppendLine($"this.Root = {root};");
+                        this.AppendLine($"base.Root = {root};");
+
+                        this.AppendLine($"Development.Current?.Connect(this);");
+                        this.AppendLine($"this.Initialize();");
                     });
 
-                    members.OrderBy(x => x);
+                    this.AppendLine($"public override Flex.Node Root");
+                    this.Body(() =>
+                    {
+
+                        this.AppendLine($"get => base.Root;");
+
+                        this.AppendLine("set");
+                        this.Body(() =>
+                        {
+                            foreach (var member in members)
+                            {
+                                this.AppendLine($"this.{member.Item2} = value?.Find<{member.Item1}>(\"{member.Item2}\") ?? new {member.Item1}();");
+                            }
+
+                            this.AppendLine($"base.Root = value;");
+                            this.AppendLine($"this.Initialize();");
+                        });
+                    });
+
+                    members = members.OrderBy(x => x).ToList();
                     foreach (var member in members)
                     {
-                        this.AppendLine(member);
+                        this.AppendLine($"public {member.Item1} {member.Item2} {{ get; private set; }}");
                     }
+
+                    this.AppendLine("partial void Initialize();");
                 });
             });
 
@@ -76,7 +102,7 @@ namespace SkiaSharp.Components
                    (a is YogaValue va && float.IsNaN(va.Value) && b is YogaValue vb && float.IsNaN(vb.Value));
         }
 
-        private string Generate(YogaNode node, List<string> members)
+        private string Generate(YogaNode node, List<Tuple<string, string>> members)
         {
             var nodeName = $"node_{NewId()}";
             this.AppendLine($"var {nodeName} = new Flex.Node();");
@@ -105,20 +131,21 @@ namespace SkiaSharp.Components
                 if(view.Name != null)
                 {
                     viewName = view.Name;
-                    members.Add($"public {viewType} {viewName} {{ get; private set; }}");
+                    members.Add(new Tuple<string, string>(viewType, viewName));
+                    this.AppendLine($"this.{viewName} = new {viewType}();");
                 }
                 else
                 {
                     viewName = "view_" + NewId();
-                    members.Add($"private {viewType} {viewName};");
+                    this.AppendLine($"var {viewName} = new {viewType}();");
                 }
 
-                this.AppendLine($"this.{viewName} = new {viewType}();");
 
                 // Generating all view properties
                 var defaultView = Activator.CreateInstance(view.GetType()) as View;
                 var viewProperties = view.GetType().GetRuntimeProperties()
                                                    .Where(x => x.CanWrite && x.CanRead)
+                                                   .Where(x => x.Name != nameof(defaultView.NeedsLayout))
                                                    .Where(x => x.Name != nameof(defaultView.Parent))
                                                    .Where(x => x.Name != nameof(defaultView.LayoutFrame))
                                                    .ToArray();
@@ -131,7 +158,7 @@ namespace SkiaSharp.Components
                     if(currentValue != defaultValue)
                     {
                         Debug.WriteLine($"{viewName}.{property.Name} :> '{defaultValue}' != '{currentValue}'");
-                        this.AppendLine($"this.{viewName}.{property.Name} = {GenerateValue(currentValue)};");
+                        this.AppendLine($"{viewName}.{property.Name} = {GenerateValue(currentValue)};");
                     }
                     else
                     {
@@ -139,7 +166,7 @@ namespace SkiaSharp.Components
                     }
                 }
 
-                this.AppendLine($"{nodeName}.View = this.{viewName};");
+                this.AppendLine($"{nodeName}.View = {viewName};");
             }
 
             foreach (var child in node)

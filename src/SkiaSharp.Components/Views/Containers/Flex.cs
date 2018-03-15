@@ -86,7 +86,7 @@ namespace SkiaSharp.Components
 
         private Node root;
 
-        public Node Root
+        public virtual Node Root
         {
             get => this.root;
             set
