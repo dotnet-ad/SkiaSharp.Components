@@ -4,10 +4,17 @@ namespace Test
 {
     public partial class Sample
     {
+        private Item item;
+
         public Sample(Item item)
         {
-            this.Initialize();
+            this.item = item;
 
+            this.Load();
+        }
+
+        partial void Initialize()
+        {
             this.title.Text = item.Title;
             this.subtitle.Text = "Hey this is a subtitle!";
             this.description.Text = item.Description;

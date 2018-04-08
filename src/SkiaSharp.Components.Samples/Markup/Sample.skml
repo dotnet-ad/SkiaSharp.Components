@@ -3,7 +3,7 @@
         <Row Style="height:100">
             <Path Name="icon" Style="width:100;margin-right:20;stroke:3,#FF000000" />
             <Column Style="align-self:center">
-                <Label Name="title" Style="text-size:20;" />
+                <Label Name="title" Style="text-size:27;" />
                 <Label Name="subtitle" Style="text-size:12;foreground:#FF666666;" />
             </Column>
         </Row>
