@@ -24,7 +24,7 @@ namespace SkiaSharp.Components
             {
                 if(this.view != null)
                 {
-                    view.Invalidated -= OnViewInvalidated; 
+                    this.view.Invalidated -= OnViewInvalidated; 
                 }
 
                 this.view = value;
@@ -32,30 +32,34 @@ namespace SkiaSharp.Components
 
                 if (this.view != null)
                 {
+                    this.view.Invalidated += OnViewInvalidated; // TODO Weak listener
                     this.view.Invalidate();
-                    view.Invalidated += OnViewInvalidated; // TODO Weak listener
                 }
             }
         }
 
         private void OnViewInvalidated(object sender, EventArgs e)
         {
-            Density.Global = (float)UIScreen.MainScreen.Scale;
+            this.InvokeOnMainThread(() => {
+                // manipulate UI controls
+               
+                Density.Global = (float)UIScreen.MainScreen.Scale;
 
-            if(this.View != null)
-            {
-                var newSize = new SKSize((float)this.Bounds.Size.Width, (float)this.Bounds.Size.Height);
-                Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> Invalidated start");
-                if (this.size != newSize)
+                if(this.View != null)
                 {
-                    Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> \tLayouting...");
-                    this.size = newSize;
-                    this.view.Layout(SKRect.Create(SKPoint.Empty, ToPlatform(this.size)));
+                    var newSize = new SKSize((float)this.Bounds.Size.Width, (float)this.Bounds.Size.Height);
+                    Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> Invalidated start");
+                    if (this.size != newSize || this.view.NeedsLayout)
+                    {
+                        Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> \tLayouting...");
+                        this.size = newSize;
+                        this.view.Layout(SKRect.Create(SKPoint.Empty, ToPlatform(this.size)));
+                    }
+                    Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> \tSize : {this.size}");
+                    this.SetNeedsDisplayInRect(this.Bounds);
+                    Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> Invalidated end");
                 }
-                Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> \tSize : {this.size}");
-                this.SetNeedsDisplayInRect(this.Bounds);
-                Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> Invalidated end");
-            }
+            });
         }
 
         private void OnPaint(object sender, SKPaintSurfaceEventArgs e)

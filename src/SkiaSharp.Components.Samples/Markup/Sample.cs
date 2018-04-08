@@ -1,17 +1,18 @@
-﻿using SkiaSharp.Components;
+﻿using SkiaSharp.Components.Samples;
 
 namespace Test
 {
     public partial class Sample
     {
-        public Sample()
+        public Sample(Item item)
         {
             this.Initialize();
 
-            this.title.Text = "Hello world!";
+            this.title.Text = item.Title;
             this.subtitle.Text = "Hey this is a subtitle!";
-            this.description.Text = "Praesent elementum vestibulum erat. Aliquam malesuada mi sed quam eleifend, id fringilla urna porttitor. Aenean nec neque interdum, volutpat sapien at, dignissim est.";
-            this.icon.Source = Icons.Aperture.Path;
+            this.description.Text = item.Description;
+            this.icon.Source = item.Icon.Path;
+            this.image.Source = $"http://via.placeholder.com/400?+text={item.Title}";
         }
     }
 }

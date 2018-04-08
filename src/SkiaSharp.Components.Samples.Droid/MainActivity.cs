@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.OS;
+using Test;
 
 namespace SkiaSharp.Components.Samples.Droid
 {
@@ -10,9 +11,12 @@ namespace SkiaSharp.Components.Samples.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            var view = new FlexSample();
-            var renderer = new Renderer(this);
-            renderer.View = view.Build();
+            //var renderer = new Renderer(this);
+            //renderer.View = new Sample();
+
+            // Builder
+            var renderer = new BuilderRenderer(new BuilderSample(), this);
+
             SetContentView(renderer);
         }
     }

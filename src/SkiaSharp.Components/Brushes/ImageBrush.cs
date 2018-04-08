@@ -5,13 +5,13 @@ namespace SkiaSharp.Components
 {
     public class ImageBrush : IBrush
     {
-        public ImageBrush(Func<Stream> source, float opacity)
+        public ImageBrush(SKBitmap source, float opacity)
         {
             this.Source = source;
             this.Opacity = opacity;
         }
 
-        public Func<Stream> Source { get; }
+        public SKBitmap Source { get; }
 
         public float Opacity { get; }
 
@@ -26,9 +26,7 @@ namespace SkiaSharp.Components
                 canvas.Save();
                 try
                 {
-                    using(var stream = this.Source())
-                    using (var bitmap = SKBitmap.Decode(stream))
-                    using (var img = SKImage.FromBitmap(bitmap))
+                    using (var img = SKImage.FromBitmap(Source))
                     {
                         paint.Color = SKColors.White.WithAlpha((byte)(this.Opacity * 255));
                         canvas.ClipPath(path);

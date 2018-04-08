@@ -30,32 +30,18 @@
                     var source = this.Source[i];
                     var output = this.OutputFile[i];
 
-                    var allStylesheets = source.GetMetadata("Stylesheets").Split(';').Select(x => x.Trim());
-                    this.Log.LogMessage("Stylesheets: {0}", string.Join(",", allStylesheets.Select(x => x)));
-
                     // Parse skml
                     this.Log.LogMessage("Loading file: {0}", source.ItemSpec);
                     var parser = new SkmlParser();
                     var xml = XDocument.Load(source.ItemSpec);
 
                     // Parse referenced skss
-                    var skssParser = new SkssParser();
-                    var stylesheetsNames = xml.Root.Attribute("Stylesheets")?.Value?.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries) ?? new string [] {};
-                    var stylesheets = stylesheetsNames.Select(x => allStylesheets.FirstOrDefault(f => Path.GetFileName(f) == x))
-                                                      .Select(x =>
-                                                        {
-                                                            Log.LogMessage("Parsing stylesheet '{0}'...", x);
-                                                            using (var skssStream = File.OpenRead(x))
-                                                            {
-                                                                return skssParser.Parse(skssStream);
-                                                            }
-                                                        }).ToArray();
 
                     var layout = new Layout()
                     {
+                        Path = source.ItemSpec,
                         Content = xml,
                     };
-                    layout.Stylesheets.AddRange(stylesheets);
 
                     this.Log.LogMessage("Parsing file: {0}", source.ItemSpec);
                     var flex = parser.Parse(layout);

@@ -42,7 +42,11 @@ namespace SkiaSharp.Components
         public IEnumerable<Span> Spans 
         {
             get => this.spans;
-            set => this.SetAndInvalidate(ref this.spans, value);
+            set
+            {
+                this.NeedsLayout = true;
+                this.SetAndInvalidate(ref this.spans, value);
+            }
         }
 
         public IBrush Foreground

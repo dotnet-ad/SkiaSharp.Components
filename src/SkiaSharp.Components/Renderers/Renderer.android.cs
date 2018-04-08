@@ -14,9 +14,19 @@ namespace SkiaSharp.Components
             this.PaintSurface += OnPaint;
         }
 
+        #region Fields
+
         private View view;
 
+        private float lastWidth;
+
         private SKRect size;
+
+        private bool isInvalidated;
+
+        #endregion
+
+        #region Properties
 
         public View View
         {
@@ -25,46 +35,85 @@ namespace SkiaSharp.Components
             {
                 if (this.view != null)
                 {
-                    view.Invalidated -= OnViewInvalidated;
+                    this.view.Invalidated -= OnViewInvalidated;
                 }
 
                 this.view = value;
-                //this.size = SKRect.Empty;
 
                 if (this.view != null)
                 {
-                    this.view.Invalidate();
-                    view.Invalidated += OnViewInvalidated; // TODO Weak listener
+                    this.view.Invalidated += OnViewInvalidated; // TODO Weak listener
                 }
+
+                this.isInvalidated = true;
+                this.Invalidate();
             }
         }
 
+        #endregion
 
         private void OnViewInvalidated(object sender, EventArgs e)
         {
-            var displayMetrics = this.Context.Resources.DisplayMetrics;
-            Density.Global = displayMetrics.Density;
+            this.Post(() =>
+            {
+                if(this.view != null)
+                {
+                    this.isInvalidated = true;
+                    LayoutView(this.MeasuredWidth, this.MeasuredHeight);
+                    this.Invalidate();
+                }
+            });
+        }
 
-            Debug.WriteLine("<OnViewInvalidated start>");
-            Debug.WriteLine("Layout...");
-            this.view.Layout(this.size);
-            this.Invalidate();
-            Debug.WriteLine("<OnViewInvalidated end>");
+        private void LayoutView(float w, float h)
+        {
+            if (w != lastWidth || this.view.NeedsLayout)
+            {
+                this.lastWidth = w;
+
+                var displayMetrics = this.Context.Resources.DisplayMetrics;
+                Density.Global = displayMetrics.Density;
+
+                this.size = SKRect.Create(SKPoint.Empty, new SKSize(w, h));
+                Debug.WriteLine($"Layout {this.size} ...");
+                this.view?.LayoutIfNeeded(this.size);
+            }
         }
 
         private void OnPaint(object sender, SKPaintSurfaceEventArgs e)
         {
-            e.Surface.Canvas.Clear(SKColors.White);
-            this.view.Render(e.Surface.Canvas);
+            if(this.isInvalidated)
+            {
+                e.Surface.Canvas.Clear(SKColors.White);
+                Debug.WriteLine($"Paint!");
+                this.view?.Render(e.Surface.Canvas);
+                this.isInvalidated = false;
+            }
         }
 
-        protected override void OnSizeChanged(int w, int h, int oldw, int oldh)
+        protected override void OnMeasure(int widthMeasureSpec, int heightMeasureSpec)
         {
-            base.OnSizeChanged(w, h, oldw, oldh);
+            var wMode = MeasureSpec.GetMode(widthMeasureSpec);
+            var hMode = MeasureSpec.GetMode(heightMeasureSpec);
 
-            if (w != oldw || h != oldh)
+            var totalWidth = MeasureSpec.GetSize(widthMeasureSpec);
+            var totalHeight = MeasureSpec.GetSize(heightMeasureSpec);
+
+            if(this.view != null)
             {
-                this.size = SKRect.Create(SKPoint.Empty, new SKSize(w, h));
+                var w = wMode == MeasureSpecMode.Unspecified ? float.MaxValue : totalWidth;
+                var h = hMode == MeasureSpecMode.Unspecified ? float.MaxValue : totalHeight;
+
+                this.LayoutView(w, h);
+            
+                var mw = (int)this.View.LayoutFrame.Width;
+                var mh = (int)this.View.LayoutFrame.Height;
+
+                this.SetMeasuredDimension(mw, mh);
+            }
+            else
+            {
+                this.SetMeasuredDimension(0, 0);
             }
         }
 
@@ -72,11 +121,10 @@ namespace SkiaSharp.Components
 
         public Dictionary<int, Touch> touches = new Dictionary<int, Touch>();
 
-        public override bool OnTouchEvent(Android.Views.MotionEvent e)
+        public override bool OnTouchEvent(MotionEvent e)
         {
             var action = e.ActionMasked;
             var index = e.ActionIndex;
-            Debug.WriteLine($"ACTION:{action}");
             var coords = new MotionEvent.PointerCoords();
             e.GetPointerCoords(index, coords);
             var position = new SKPoint(coords.X, coords.Y);
@@ -90,7 +138,7 @@ namespace SkiaSharp.Components
                     State = TouchState.Began,
                 };
                 this.touches[index] = current;
-                this.view.Touch(new [] { current });
+                this.view?.Touch(new [] { current });
                 return true;
             }
             else if(action == MotionEventActions.Move)
@@ -98,7 +146,7 @@ namespace SkiaSharp.Components
                 var current = this.touches[index];
                 current.Position = position;
                 current.State = TouchState.Moved;
-                this.view.Touch(new[] { current });
+                this.view?.Touch(new[] { current });
                 return true;
             }
             else if (action == MotionEventActions.Cancel || action == MotionEventActions.Up)
@@ -107,7 +155,7 @@ namespace SkiaSharp.Components
                 this.touches.Remove(index);
                 current.Position = position;
                 current.State = TouchState.Ended;
-                this.view.Touch(new[] { current });
+                this.view?.Touch(new[] { current });
                 return true;
             }
 
