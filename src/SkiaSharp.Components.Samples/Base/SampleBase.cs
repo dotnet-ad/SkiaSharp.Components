@@ -1,6 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Net.Http;
+
 namespace SkiaSharp.Components.Samples
 {
     public abstract class SampleBase
@@ -62,8 +61,9 @@ namespace SkiaSharp.Components.Samples
                 Color = SKColors.Black.WithAlpha(80),
             };
 
-            this.Image = new Box()
+            this.Image = new Image()
             {
+                Source = "https://source.unsplash.com/random",
                 Fill = new ColorBrush(SKColors.LightGray),
                 CornerRadius = 5.0f,
                 Shadow = shadow,
@@ -92,26 +92,6 @@ namespace SkiaSharp.Components.Samples
                     Brush = iconGradient,
                 },
             };
-
-            this.LoadImage();
-        }
-
-        private async void LoadImage()
-        {
-            var client = new HttpClient();
-            using(var response = await client.GetStreamAsync("https://source.unsplash.com/random"))
-            {
-                var memory = new MemoryStream();
-                response.CopyTo(memory);
-                this.Image.Fill = new ImageBrush(() => {
-                    var copy = new MemoryStream();
-                    memory.Seek(0, SeekOrigin.Begin);
-                    memory.CopyTo(copy);
-                    copy.Seek(0, SeekOrigin.Begin);
-                    return copy;
-                }, 1.0f);
-            }
-           
         }
 
         public abstract View Build();

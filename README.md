@@ -13,8 +13,9 @@ var result = new Grid();
 
 this.Title = new Label
 {
-    TextSize = 40,
-    Text = "Title of the view"
+    TextSize = 30,
+    Text = "Title of the view",
+    VerticalAlignment = Alignment.Center,
 };
 
 this.Description = new Label
@@ -28,7 +29,7 @@ this.Description = new Label
         },
         new Span
         {
-            ForegroundBrush = new ColorBrush(SKColors.Red),
+            ForegroundBrush = new ColorBrush(new SKColor(0xFFF44336)),
             Decorations = TextDecoration.Bold,
             Text = "id ornare tortor convallis sed"
         },
@@ -39,14 +40,47 @@ this.Description = new Label
     },
 };
 
+var gradient = new GradientBrush(new SKPoint(0, 0), new SKPoint(0, 1), new[]
+{
+    new Tuple<float, SKColor>(0, new SKColor(255,255,255,255)),
+    new Tuple<float, SKColor>(1, new SKColor(238,238,238,255)),
+});
+
+var shadow = new Shadow()
+{
+    Blur = new SKPoint(10, 10),
+    Color = SKColors.Black.WithAlpha(80),
+};
+
+this.Image = new Image()
+{
+    Source = "https://source.unsplash.com/random",
+    Fill = new ColorBrush(SKColors.LightGray),
+    CornerRadius = 5.0f,
+    Shadow = shadow,
+};
+
+this.Box = new Box()
+{
+    Fill = gradient,
+    CornerRadius = 5.0f,
+    Shadow = shadow,
+};
+
+var iconGradient = new GradientBrush(new SKPoint(0, 0), new SKPoint(1, 1), new[]
+{
+    new Tuple<float, SKColor>(0, new SKColor(0xFFF44336)),
+    new Tuple<float, SKColor>(1, new SKColor(0xFF3F51B5)),
+});
+
 this.Icon = new Path
 {
-    Source = IconPath.ArrowUp,
+    Source = IconPath.Aperture,
     ViewBox = SKRect.Create(0, 0, 24, 24),
     Stroke = new Stroke()
     {
         Size = 5,
-        Brush = new ColorBrush(SKColors.Blue),
+        Brush = iconGradient,
     },
 };
 
@@ -67,6 +101,7 @@ result.RowDefinitions = new[]
 // Setting child positions
 result.AddView(this.Icon, 0, 0);
 result.AddView(this.Title, 1, 0);
+result.AddView(this.Box, 0, 1, 2);
 result.AddView(this.Description, 0, 1, 2);
 
 result.Layout(SKRect.Create(0,0,500,500));
@@ -95,7 +130,7 @@ this.Button.Pressed += (s, e) => ((Tap)s).BackgroundBrush = new ColorBrush(SKCol
 this.Button.Released += (s, e) => ((Tap)s).BackgroundBrush = new ColorBrush(SKColors.DeepPink);
 ```
 
-If you use provided `Layout` and its renderer, touches will be wired up automatically.
+If you use provided `Renderer`, touches will be wired up automatically.
 
 ## Contributions
 

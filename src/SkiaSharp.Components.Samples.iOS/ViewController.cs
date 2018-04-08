@@ -14,8 +14,14 @@ namespace SkiaSharp.Components.Samples.iOS
         {
             base.ViewDidLoad();
 
-            var view = new FlexSample();
-            var renderer = new Renderer(view.Build());
+            // Basic
+            //var view = new FlexSample();
+            //var renderer = new Renderer();
+            //renderer.View = view.Build();
+            //this.View = renderer;
+
+            // Builder
+            var renderer = new BuilderRenderer(new BuilderSample());
             this.View = renderer;
         }
     }
