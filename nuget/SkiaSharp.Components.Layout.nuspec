@@ -22,5 +22,12 @@
    </metadata>
    <files>
      <file src="..\src\SkiaSharp.Components.Layout\bin\Release\netstandard1.3\SkiaSharp.Components.Layout.dll" target="lib\netstandard1.3\SkiaSharp.Components.Layout.dll" />
+
+     <file src="..\src\SkiaSharp.Components.Layout.iOS\bin\Release\SkiaSharp.Components.Layout.dll" target="lib\xamarinios\SkiaSharp.Components.Layout.dll" />
+     <file src="..\src\SkiaSharp.Components.Layout.iOS\bin\Release\SkiaSharp.Components.Layout.iOS.dll" target="lib\xamarinios\SkiaSharp.Components.Layout.iOS.dll" />
+
+     <file src="..\src\SkiaSharp.Components.Layout.Droid\bin\Release\SkiaSharp.Components.Layout.dll" target="lib\monoandroid\SkiaSharp.Components.Layout.dll" />
+     <file src="..\src\SkiaSharp.Components.Layout.Droid\bin\Release\SkiaSharp.Components.Layout.Droid.dll" target="lib\monoandroid\SkiaSharp.Components.Layout.Droid.dll" />
+
    </files>
 </package>

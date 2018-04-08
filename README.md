@@ -67,6 +67,24 @@ A package containing layout helpers is available from `SkiaSharp.Components.Layo
 
 See the [sample](/src/SkiaSharp.Components.Samples/SimpleFlexView.cs) for more details.
 
+### Interactions
+
+Basic interactions are available through the `Tap` control which raises events when the user touches its frame. It is a view like any other components.
+
+```csharp
+this.Button = new Tap()
+{
+    BackgroundBrush = new ColorBrush(SKColors.DeepPink),
+    CornerRadius = 5,
+};
+
+this.Button.Tapped += (s,e) => Debug.WriteLine("Tapped");
+this.Button.Pressed += (s, e) => ((Tap)s).BackgroundBrush = new ColorBrush(SKColors.LightPink);
+this.Button.Released += (s, e) => ((Tap)s).BackgroundBrush = new ColorBrush(SKColors.DeepPink);
+```
+
+If you use provided `Layout` and its renderer, touches will be wired up automatically.
+
 ## Contributions
 
 Contributions are welcome! If you find a bug please report it and if you want a feature please report it.
