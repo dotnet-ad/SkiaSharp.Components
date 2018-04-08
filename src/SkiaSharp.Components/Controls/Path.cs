@@ -98,7 +98,7 @@
                     IsAntialias = true,
                     Style = SKPaintStyle.Fill,
                 })
-                using(var brush = this.ForegroundBrush.Apply(paint))
+                using(var brush = this.ForegroundBrush.Apply(paint, frame))
                 {
                     canvas.DrawPath(path, paint);
                 }
@@ -113,7 +113,7 @@
                     StrokeWidth = this.StrokeSize,
                     StrokeCap = this.StrokeCap
                 })
-                using (var brush = this.ForegroundBrush.Apply(paint))
+                using (var brush = this.ForegroundBrush.Apply(paint, frame))
                 {
                     canvas.DrawPath(path, paint);
                 }

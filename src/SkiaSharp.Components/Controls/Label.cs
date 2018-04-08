@@ -70,7 +70,6 @@ namespace SkiaSharp.Components
             {
                 TextSize = this.textSize,
             })
-            using(var brush = this.ForegroundBrush.Apply(paint))
             {
                 var spaceWidth = paint.MeasureText(" ");
 
@@ -132,6 +131,7 @@ namespace SkiaSharp.Components
                 TextSize = this.textSize,
                 Typeface = typeface,
             })
+            using (var brush = this.ForegroundBrush.Apply(paint, frame))
             {
                 var lines = this.SplitLines(frame.Size);
                 for (int i = 0; i < lines.Length; i++)

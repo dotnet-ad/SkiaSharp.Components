@@ -3,6 +3,6 @@ namespace SkiaSharp.Components
 {
     public interface IBrush
     {
-        IDisposable Apply(SKPaint paint);
+        IDisposable Apply(SKPaint paint, SKRect frame);
     }
 }
