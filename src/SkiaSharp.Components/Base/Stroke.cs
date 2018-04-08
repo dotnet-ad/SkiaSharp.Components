@@ -1,4 +1,6 @@
-﻿namespace SkiaSharp.Components
+﻿using System.Linq;
+
+namespace SkiaSharp.Components
 {
     public class Stroke
     {

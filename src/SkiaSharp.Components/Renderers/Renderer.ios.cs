@@ -45,23 +45,23 @@ namespace SkiaSharp.Components
             if(this.View != null)
             {
                 var newSize = new SKSize((float)this.Bounds.Size.Width, (float)this.Bounds.Size.Height);
-                Debug.WriteLine($"<{this.View.GetType().Name} ({this.GetHashCode()})> Invalidated start");
+                Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> Invalidated start");
                 if (this.size != newSize)
                 {
-                    Debug.WriteLine($"<{this.View.GetType().Name} ({this.GetHashCode()})> \tLayouting...");
+                    Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> \tLayouting...");
                     this.size = newSize;
                     this.view.Layout(SKRect.Create(SKPoint.Empty, ToPlatform(this.size)));
                 }
-                Debug.WriteLine($"<{this.View.GetType().Name} ({this.GetHashCode()})> \tSize : {this.size}");
+                Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> \tSize : {this.size}");
                 this.SetNeedsDisplayInRect(this.Bounds);
-                Debug.WriteLine($"<{this.View.GetType().Name} ({this.GetHashCode()})> Invalidated end");
+                Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> Invalidated end");
             }
         }
 
         private void OnPaint(object sender, SKPaintSurfaceEventArgs e)
         {
             e.Surface.Canvas.Clear(SKColors.White);
-            Debug.WriteLine($"<{this.View.GetType().Name} ({this.GetHashCode()})> Rendering {this.view.AbsoluteFrame}");
+            Debug.WriteLine($"<{this.View.GetType().Name} ({this.View.Name} - {this.GetHashCode()})> Rendering {this.view.AbsoluteFrame}");
             this.view.Render(e.Surface.Canvas);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace SkiaSharp.Components
 {
@@ -30,6 +31,8 @@ namespace SkiaSharp.Components
 
         #endregion
 
+        public string Name { get; set; }
+
         public virtual SKRect AbsoluteFrame
         {
             get
@@ -50,6 +53,7 @@ namespace SkiaSharp.Components
         {
             if(lastLayout != available)
             {
+                Debug.WriteLine($"[{this.GetType().Name}:{this.Name}] Layout in {available}");
                 this.Layout(available);
                 this.lastLayout = available;
                 return true;

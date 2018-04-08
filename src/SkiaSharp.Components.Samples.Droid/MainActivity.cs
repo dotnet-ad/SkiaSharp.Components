@@ -10,8 +10,9 @@ namespace SkiaSharp.Components.Samples.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            var view = new GridSample();
-            var renderer = new Renderer(view.Build(), this);
+            var view = new FlexSample();
+            var renderer = new Renderer(this);
+            renderer.View = view.Build();
             SetContentView(renderer);
         }
     }

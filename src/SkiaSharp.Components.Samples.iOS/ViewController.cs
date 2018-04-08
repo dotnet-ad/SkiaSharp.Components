@@ -15,14 +15,20 @@ namespace SkiaSharp.Components.Samples.iOS
             base.ViewDidLoad();
 
             // Basic
-            //var view = new FlexSample();
+            var view = new FlexSample();
+            var renderer = new Renderer();
+            renderer.View = view.Build();
+            this.View = renderer;
+
+            // Builder
+            //var renderer = new BuilderRenderer(new BuilderSample());
+            //this.View = renderer;
+
+            // Markup
+            //var view = new MarkupSample();
             //var renderer = new Renderer();
             //renderer.View = view.Build();
             //this.View = renderer;
-
-            // Builder
-            var renderer = new BuilderRenderer(new BuilderSample());
-            this.View = renderer;
         }
     }
 }
