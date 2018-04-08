@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
-namespace SkiaSharp.Components.Samples
+
+namespace SkiaSharp.Components.Layout
 {
     public class FlexView : View
     {
