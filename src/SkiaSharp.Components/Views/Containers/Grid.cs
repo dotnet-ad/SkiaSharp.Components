@@ -106,7 +106,7 @@ namespace SkiaSharp.Components
             base.RemoveView(subview);
         }
 
-        public void AddView(View subview, int column, int row, int columnSpan = 1, int rowSpan = 1)
+        public Grid AddView(View subview, int column, int row, int columnSpan = 1, int rowSpan = 1)
         {
             this.AddView(subview);
             var position = this.GetPosition(subview);
@@ -114,6 +114,7 @@ namespace SkiaSharp.Components
             position.Row = row;
             position.ColumnSpan = columnSpan;
             position.RowSpan = rowSpan;
+            return this;
         }
 
         private SKRect[,] CalculateCellSizes(SKRect available)
