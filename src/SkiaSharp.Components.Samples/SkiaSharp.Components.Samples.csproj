@@ -17,11 +17,7 @@
     <Folder Include="Markup\" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Markup\Sample.skml" />
-    <None Remove="Markup\Sample.skss" />
+    <Compile Remove="Markup\MarkupSample.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Markup\Sample.skml" />
-    <EmbeddedResource Include="Markup\Sample.skss" />
-  </ItemGroup>
+  <Import Project="..\SkiaSharp.Components.Markup.Build\bin\Debug\SkiaSharp.Components.Markup.targets" />
 </Project>

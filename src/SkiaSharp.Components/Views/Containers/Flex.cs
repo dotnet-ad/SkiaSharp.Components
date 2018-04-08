@@ -13,12 +13,7 @@ namespace SkiaSharp.Components
 
             public Node(View view)
             {
-                this.Data = view;
-
-                if(view is IMeasurable)
-                {
-                    this.HasAutoHeight = true;
-                }
+                this.View = view;
             }
 
             public T Find<T>(string name) where T : View
@@ -66,7 +61,27 @@ namespace SkiaSharp.Components
                 }
             }
 
-            public View View => this.Data as View;
+            public View View 
+            {
+                get => this.Data as View;
+                set
+                {
+                    this.Data = value;
+                    if (value is IMeasurable)
+                    {
+                        this.HasAutoHeight = true;
+                    }
+                }
+            }
+
+            private float flex;
+
+            // Needed since YogaNode doesn't have a getter ...
+            public float FlexValue
+            {
+                get => this.flex;
+                set => this.Flex = this.flex = value;
+            }
         }
 
         private Node root;
