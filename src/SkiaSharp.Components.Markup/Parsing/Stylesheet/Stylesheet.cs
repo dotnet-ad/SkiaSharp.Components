@@ -7,6 +7,23 @@ namespace SkiaSharp.Components
     {
         private Dictionary<string, IDictionary<string, string>> classes = new Dictionary<string, IDictionary<string, string>>();
 
+        public Stylesheet Merge(Stylesheet other)
+        {
+            var result = new Stylesheet();
+
+            foreach (var item in this.classes)
+            {
+                result.AddClass(item.Key, item.Value);
+            }
+
+            foreach (var item in other.classes)
+            {
+                result.AddClass(item.Key, item.Value);
+            }
+
+            return result;
+        }
+
         public void AddClass(string name, IDictionary<string, string> properties)
         {
             IDictionary<string, string> allProperties;

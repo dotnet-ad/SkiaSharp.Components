@@ -13,6 +13,8 @@ namespace SkiaSharp.Components
 
         public object Parse(Type type, string value)
         {
+            value = value.Trim();
+
             if (type == typeof(string))
                 return value;
 
@@ -100,9 +102,6 @@ namespace SkiaSharp.Components
 
             if (type == typeof(SKPath))
             {
-                if (value.StartsWith("icon:"))
-                    return Enum.Parse(typeof(IconPath), value.Substring(5));
-                
                 return SKPath.ParseSvgPathData(value);
             }
 
