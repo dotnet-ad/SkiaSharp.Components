@@ -9,9 +9,6 @@
     <ProjectReference Include="..\SkiaSharp.Components.Layout\SkiaSharp.Components.Layout.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Flex\" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Facebook.Yoga" Version="1.5.0-pre1" />
   </ItemGroup>
 </Project>

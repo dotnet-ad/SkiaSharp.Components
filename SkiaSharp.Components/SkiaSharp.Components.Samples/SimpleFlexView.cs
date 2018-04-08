@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using SkiaSharp.Components.Layout;
+using System.Linq;
 
 namespace SkiaSharp.Components.Samples
 {
@@ -65,13 +66,11 @@ namespace SkiaSharp.Components.Samples
                 AutoSize = true,
             });
 
-            var source = new SKPath();
-            source.AddCircle(20, 20, 20);
-            source.AddPoly(new [] { new SKPoint(20, 0), new SKPoint(0,20), new SKPoint(40, 20), new SKPoint(20, 40) }, true);
             this.Icon = row.AddView(new Layout<Path>(new Path
             {
-                Source = source,
+                Source = IconPath.ArrowUp,
                 StrokeSize = 5,
+                ViewBox = SKRect.Create(0,0,24,24),
             })
             {
                 AlignSelf = Facebook.Yoga.YogaAlign.Center,
@@ -92,12 +91,20 @@ namespace SkiaSharp.Components.Samples
             this.Update();
         }
 
+        private int currentIcon = 0;
+
+        private string[] iconNames = typeof(IconPath).GetProperties().Select(x => x.Name).ToArray();
+
+        private SKPath[] iconPaths = typeof(IconPath).GetProperties().Select(x => (SKPath)x.GetValue(null)).ToArray();
+
         private async void Update()
         {
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 300; i++)
             {
-                await Task.Delay(1000);
-                this.Description.Text += " new words";
+                await Task.Delay(750);
+                currentIcon = (currentIcon + 1) % iconPaths.Length;
+                this.Description.Text += $" | {iconNames[currentIcon]}";
+                this.Icon.Source = iconPaths[currentIcon];
             }
         }
     }
