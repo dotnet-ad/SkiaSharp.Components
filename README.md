@@ -1,5 +1,7 @@
 # SkiaSharp.Components
 
+![](doc/demo.gif)
+
 [![NuGet](https://img.shields.io/nuget/v/SkiaSharp.Components.svg?label=NuGet)](https://www.nuget.org/packages/SkiaSharp.Components/) [![NuGet](https://img.shields.io/nuget/v/SkiaSharp.Components.Layout.svg?label=NuGet)](https://www.nuget.org/packages/SkiaSharp.Components.Layout/) [![Donate](https://img.shields.io/badge/donate-paypal-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ZJZKXPPGBKKAY&lc=US&item_name=GitHub&item_number=0000001&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
 
 Producing rendering code for [SkiaSharp](https://github.com/mono/SkiaSharp) can be extremely verbose and repetitive. **SkiaSharp.Components** are higher level views that make declarations more concise.
