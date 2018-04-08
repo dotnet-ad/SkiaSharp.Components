@@ -63,7 +63,7 @@
                 this.Fill.Fill(canvas,path);
 
             if(this.Stroke != null)
-                this.Stroke.Brush.Stroke(canvas, path, this.Stroke.Size, this.Stroke.Style);
+                this.Stroke.Brush.Stroke(canvas, path, this.Stroke.Size, this.Stroke.Style, this.Stroke.Cap, this.Stroke.Join);
         }
     }
 }

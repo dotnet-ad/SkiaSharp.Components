@@ -11,7 +11,7 @@ namespace Test
             this.title.Text = "Hello world!";
             this.subtitle.Text = "Hey this is a subtitle!";
             this.description.Text = "Praesent elementum vestibulum erat. Aliquam malesuada mi sed quam eleifend, id fringilla urna porttitor. Aenean nec neque interdum, volutpat sapien at, dignissim est.";
-            this.icon.Source = IconPath.Aperture;
+            this.icon.Source = Icons.Aperture.Path;
         }
     }
 }

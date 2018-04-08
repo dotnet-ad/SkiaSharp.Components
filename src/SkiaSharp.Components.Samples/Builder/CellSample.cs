@@ -55,9 +55,9 @@ namespace SkiaSharp.Components.Samples
 
             this.Icon = new Path
             {
-                Source = item.Icon,
+                Source = item.Icon.Path,
                 ViewBox = SKRect.Create(0, 0, 24, 24),
-                Stroke = new Stroke(3, iconGradient, StrokeStyle.Line),
+                Stroke = new Stroke(3, iconGradient, StrokeStyle.Line, Icons.Aperture.Cap, Icons.Aperture.Join),
             };
 
             // Layout 

@@ -2,14 +2,14 @@
 {
     public class Item
     {
-        public Item(SKPath icon, string title, string description)
+        public Item(Icon icon, string title, string description)
         {
             this.Icon = icon;
             this.Title = title;
             this.Description = description;
         }
 
-        public SKPath Icon { get; }
+        public Icon Icon { get; }
 
         public string Title { get; }
 

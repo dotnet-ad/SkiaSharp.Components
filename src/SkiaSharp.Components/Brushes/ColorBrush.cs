@@ -24,7 +24,7 @@ namespace SkiaSharp.Components
             }
         }
 
-        public void Stroke(SKCanvas canvas, SKPath path, float size, StrokeStyle style)
+        public void Stroke(SKCanvas canvas, SKPath path, float size, StrokeStyle style, SKStrokeCap cap, SKStrokeJoin join)
         {
             using (var paint = new SKPaint()
             {
@@ -32,7 +32,8 @@ namespace SkiaSharp.Components
                 StrokeWidth = size,
                 Color = this.Color,
                 Style = SKPaintStyle.Stroke,
-                StrokeCap = SKStrokeCap.Round,
+                StrokeCap = cap,
+                StrokeJoin = join,
             })
             {
                 if (style == StrokeStyle.Dotted)

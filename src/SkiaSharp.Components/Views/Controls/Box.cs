@@ -73,7 +73,7 @@ namespace SkiaSharp.Components
                 this.Fill.Fill(canvas, path);
 
             if(this.Border != null)
-                this.Border.Brush.Stroke (canvas, path, this.Border.Size, this.Border.Style);
+                this.Border.Brush.Stroke (canvas, path, this.Border.Size, this.Border.Style, this.Border.Cap, this.Border.Join);
         }
     }
 }

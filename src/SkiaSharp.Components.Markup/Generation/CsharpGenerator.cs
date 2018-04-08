@@ -182,7 +182,7 @@ namespace SkiaSharp.Components
                     return $"SKRect.Create({r.Left}, {r.Top}, {r.Width}, {r.Height})";
 
                 case Stroke s:
-                    return $"new Stroke({GenerateValue(s.Size)}, {GenerateValue(s.Brush)}, {GenerateValue(s.Style)})";
+                    return $"new Stroke({GenerateValue(s.Size)}, {GenerateValue(s.Brush)}, {GenerateValue(s.Style)}, {GenerateValue(s.Cap)}, {GenerateValue(s.Join)})";
 
                 case Shadow s:
                     return $"new Shadow({GenerateValue(s.Offset)}, {GenerateValue(s.Blur)}, {GenerateValue(s.Color)})";
