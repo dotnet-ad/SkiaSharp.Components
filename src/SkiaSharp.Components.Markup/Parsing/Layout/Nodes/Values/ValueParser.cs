@@ -98,6 +98,14 @@ namespace SkiaSharp.Components
                 };
             }
 
+            if (type == typeof(SKPath))
+            {
+                if (value.StartsWith("icon:"))
+                    return Enum.Parse(typeof(IconPath), value.Substring(5));
+                
+                return SKPath.ParseSvgPathData(value);
+            }
+
 
             if (type.GetTypeInfo().IsEnum)
             {

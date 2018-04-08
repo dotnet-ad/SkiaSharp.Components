@@ -57,7 +57,7 @@ namespace SkiaSharp.Components
             return this;
         }
 
-        public Flex.Node ParseNode(XElement element)
+        public Flex.Node ParseNode(XElement element, Stylesheet stylesheet)
         {
             var view = CreateView();
 
@@ -66,11 +66,34 @@ namespace SkiaSharp.Components
             if(view != null)
                 view.Name = element.Attribute("Name")?.Value;
 
+            var stylesProperties = new Dictionary<string, string>();
+
+            var classes = element.Attribute("Class");
+            if (classes != null)
+            {
+                var properties = stylesheet.GetProperties(classes.Value);
+
+                foreach (var p in properties)
+                {
+                    stylesProperties[p.Key] = p.Value;
+                }
+            }
+
             var style = element.Attribute("Style");
             if (style != null)
             {
-                ParseStyles(result, style.Value);
+                var properties = style.Value.Split(';')
+                                     .Select(x => x.Trim().Split(':'))
+                                     .Where(x => x.Length == 2)
+                                     .ToDictionary(x => x[0], x => x[1]);
+
+                foreach (var p in properties)
+                {
+                    stylesProperties[p.Key] = p.Value;
+                }
             }
+
+            ParseStyles(result, stylesProperties);
 
             foreach (var middleware in Middlewares)
             {
@@ -80,21 +103,13 @@ namespace SkiaSharp.Components
             return result;
         }
 
-        private void ParseStyles(Flex.Node node, string style)
+        private void ParseStyles(Flex.Node node, IDictionary<string,string> style)
         {
-            var styles = style.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim());
-
-            foreach (var property in styles)
+            foreach (var property in style)
             {
-                var split = property.Split(':');
-                if (split.Length > 1)
+                if (this.styleProperties.TryGetValue(property.Key, out PropertyParser setter))
                 {
-                    var name = split[0];
-                    var value = split[1];
-                    if (this.styleProperties.TryGetValue(name, out PropertyParser setter))
-                    {
-                        setter.Set(node, value);
-                    }
+                    setter.Set(node, property.Value);
                 }
             }
         }

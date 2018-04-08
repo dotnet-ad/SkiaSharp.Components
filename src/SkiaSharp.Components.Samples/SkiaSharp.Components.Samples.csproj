@@ -18,8 +18,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Markup\Sample.skml" />
+    <None Remove="Markup\Sample.skss" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Markup\Sample.skml" />
+    <EmbeddedResource Include="Markup\Sample.skss" />
   </ItemGroup>
 </Project>
