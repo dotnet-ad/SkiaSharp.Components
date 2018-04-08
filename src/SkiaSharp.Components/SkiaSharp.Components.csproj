@@ -1,15 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFrameworks>netstandard1.3</TargetFrameworks>
+    <!--<TargetFrameworks>netstandard1.3;MonoAndroid80;Xamarin.iOS10</TargetFrameworks> -->
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="1.59.2" />
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
+    <Compile Remove="**\*.android.cs;" />
+    <Compile Remove="**\*.ios.cs;" />
+    <PackageReference Include="SkiaSharp" Version="1.60.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-    <Folder Include="Base\" />
-    <Folder Include="Brushes\" />
+    <!-- Soon ... waiting for support 
+   <ItemGroup Condition="'$(TargetFramework)'=='MonoAndroid80'">
+    <PackageReference Include="SkiaSharp.Views" Version="1.60.0" />
+    <Compile Remove="**\*.ios.cs;" />
   </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='Xamarin.iOS10'">
+    <PackageReference Include="SkiaSharp.Views" Version="1.60.0" />
+    <Compile Remove="**\*.android.cs;" />
+  </ItemGroup>
+    -->
 </Project>

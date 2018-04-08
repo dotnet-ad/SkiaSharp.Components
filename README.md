@@ -7,65 +7,75 @@ Producing rendering code for [SkiaSharp](https://github.com/mono/SkiaSharp) can 
 ## Quickstart
 
 ```csharp
+var result = new Grid();
+
 this.Title = new Label
 {
     TextSize = 40,
-    Text = "Title of the view",
-    Frame = SKRect.Create(0,0,200,50),
-};
-
-this.Separator = new View
-{
-    BackgroundBrush = new ColorBrush(SKColors.Black),
-    Frame = SKRect.Create(0,50,200,4),
+    Text = "Title of the view"
 };
 
 this.Description = new Label
 {
-    TextSize = 15,
-    BackgroundBrush = new ColorBrush(SKColors.White),
-    CornerRadius = 50,
-    ShadowSize = new SKSize(4,4),
-    Text = "Nam ut imperdiet nibh. Ut sollicitudin varius nibh, id ornare tortor convallis sed. Morbi volutpat, lacus efficitur volutpat lacinia, nibh velit ultricies neque, vel faucibus tellus neque at nibh. Nullam vitae tincidunt metus. Vestibulum nec nisl quis lorem tincidunt maximus eu vel lectus. Proin posuere augue molestie imperdiet scelerisque. Phasellus quis suscipit neque.",
-    Frame = SKRect.Create(0,54,200,200),
-};
-
-this.Image = new Image
-{
-    Source = "https://www.xamarin.com/content/images/pages/branding/assets/xamagon.png",
-    Frame = SKRect.Create(0,254,200,100),
+    TextSize = 16,
+    Spans = new[]
+    {
+        new Span
+        {
+            Text = "Nam ut imperdiet nibh. Ut sollicitudin varius nibh,"
+        },
+        new Span
+        {
+            ForegroundBrush = new ColorBrush(SKColors.Red),
+            Decorations = TextDecoration.Bold,
+            Text = "id ornare tortor convallis sed"
+        },
+        new Span
+        {
+            Text = ". Morbi volutpat, lacus efficitur volutpat lacinia, nibh velit ultricies neque, vel faucibus tellus neque at nibh. Nullam vitae tincidunt metus. Vestibulum nec nisl quis lorem tincidunt maximus eu vel lectus. Proin posuere augue molestie imperdiet scelerisque. Phasellus quis suscipit neque."
+        },
+    },
 };
 
 this.Icon = new Path
 {
     Source = IconPath.ArrowUp,
-    StrokeSize = 5,
     ViewBox = SKRect.Create(0, 0, 24, 24),
-    Frame = SKRect.Create(0,354,50,50),
+    Stroke = new Stroke()
+    {
+        Size = 5,
+        Brush = new ColorBrush(SKColors.Blue),
+    },
 };
 
-this.Title.Render(canvas);
-this.Separator.Render(canvas);
-this.Description.Render(canvas);
-this.Image.Render(canvas);
-this.Icon.Render(canvas);
+// Setting grid column and rows
+result.ColumnDefinitions = new[]
+{
+    Grid.Definition.Points(100),
+    Grid.Definition.Stars(1),
+};
+
+result.RowDefinitions = new[]
+{
+    Grid.Definition.Points(100),
+    Grid.Definition.Points(200),
+    Grid.Definition.Stars(1),
+};
+
+// Setting child positions
+result.AddView(this.Icon, 0, 0);
+result.AddView(this.Title, 1, 0);
+result.AddView(this.Description, 0, 1, 2);
+
+result.Layout(SKRect.Create(0,0,500,500));
+result.Render(canvas);
 ```
 
 ## Advanced usage
 
-### Subviews
-
-Children views can be added to a view with `AddView` method. The `Frame` becomes relative to its parent.
-
 ### Invalidation
 
 Each time a property of a view changes, the `Invalidated` event of a view is raised. This is useful to know when to re-render a view.
-
-### Layout
-
-A package containing layout helpers is available from `SkiaSharp.Components.Layout`. It combines the power of [SkiaSharp](https://github.com/mono/SkiaSharp) and [Yoga](https://github.com/facebook/Yoga) (and maybe [Xamarin.Flex](https://github.com/Xamarin/flex) soon).
-
-See the [sample](/src/SkiaSharp.Components.Samples/SimpleFlexView.cs) for more details.
 
 ### Interactions
 

@@ -26,7 +26,7 @@ namespace SkiaSharp.Components.Samples.Droid
 		
 		public static void UpdateIdValues()
 		{
-			global::SkiaSharp.Components.Layout.Droid.Resource.String.library_name = global::SkiaSharp.Components.Samples.Droid.Resource.String.library_name;
+			global::SkiaSharp.Components.Droid.Resource.String.library_name = global::SkiaSharp.Components.Samples.Droid.Resource.String.library_name;
 		}
 		
 		public partial class Animation
