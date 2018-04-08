@@ -20,6 +20,6 @@
     </dependencies>
    </metadata>
    <files>
-     <file src="..\src\SkiaSharp.Components\bin\Release\SkiaSharp.Components.dll" target="lib\netstandard1.3\SkiaSharp.Components.dll" />
+     <file src="..\src\SkiaSharp.Components\bin\Release\netstandard1.3\SkiaSharp.Components.dll" target="lib\netstandard1.3\SkiaSharp.Components.dll" />
    </files>
 </package>
