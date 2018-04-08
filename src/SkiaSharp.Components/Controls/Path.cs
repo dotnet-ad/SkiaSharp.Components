@@ -7,6 +7,13 @@
             this.ClipBounds = false;
         }
 
+
+        #region Constants
+
+        public static readonly IBrush DefaultForegroundBrush = new ColorBrush(SKColors.Black);
+
+        #endregion
+
         #region Fields
 
         private SKPath source;
@@ -16,6 +23,8 @@
         private SKStrokeCap strokeCap = SKStrokeCap.Round;
 
         private float strokeSize;
+
+        private IBrush foregroundBrush = DefaultForegroundBrush;
 
         private SKColor strokeColor = SKColors.Black;
 
@@ -33,6 +42,12 @@
         {
             get => this.source;
             set => this.SetAndInvalidate(ref this.source, value);
+        }
+
+        public IBrush ForegroundBrush
+        {
+            get => this.foregroundBrush;
+            set => this.SetAndInvalidate(ref this.foregroundBrush, value);
         }
 
         public SKStrokeCap StrokeCap
@@ -82,8 +97,8 @@
                 {
                     IsAntialias = true,
                     Style = SKPaintStyle.Fill,
-                    Color = this.FillColor,
                 })
+                using(var brush = this.ForegroundBrush.Apply(paint))
                 {
                     canvas.DrawPath(path, paint);
                 }
@@ -95,10 +110,10 @@
                 {
                     IsAntialias = true,
                     Style = SKPaintStyle.Stroke,
-                    Color = this.StrokeColor,
                     StrokeWidth = this.StrokeSize,
                     StrokeCap = this.StrokeCap
                 })
+                using (var brush = this.ForegroundBrush.Apply(paint))
                 {
                     canvas.DrawPath(path, paint);
                 }

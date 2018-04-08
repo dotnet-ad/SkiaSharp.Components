@@ -19,7 +19,7 @@ namespace SkiaSharp.Components.Samples
         public SimpleFlexView()
         {
             this.Root.Padding = 10;
-            this.BackgroundColor = SKColors.LightGray;
+            this.BackgroundBrush = new ColorBrush(SKColors.LightGray);
      
             this.Title = this.AddView(new Layout<Label>(new Label
             {
@@ -32,7 +32,7 @@ namespace SkiaSharp.Components.Samples
 
             this.Separator = this.AddView(new Layout<View>(new View
             {
-                BackgroundColor = SKColors.Black,
+                BackgroundBrush = new ColorBrush(SKColors.Black),
                 CornerRadius = 2,
             })
             {
@@ -54,11 +54,11 @@ namespace SkiaSharp.Components.Samples
             this.Description = row.AddView(new Layout<Label>(new Label
             {
                 TextSize = 15,
-                BackgroundColor = SKColors.White,
+                BackgroundBrush = new ColorBrush(SKColors.White),
                 CornerRadius = 50,
                 ShadowSize = new SKSize(4, 4),
                 BorderSize = 4,
-                BorderColor = SKColors.Red,
+                BorderBrush = new ColorBrush(SKColors.Red),
                 Text = "Nam ut imperdiet nibh. Ut sollicitudin varius nibh, id ornare tortor convallis sed. Morbi volutpat, lacus efficitur volutpat lacinia, nibh velit ultricies neque, vel faucibus tellus neque at nibh. Nullam vitae tincidunt metus. Vestibulum nec nisl quis lorem tincidunt maximus eu vel lectus. Proin posuere augue molestie imperdiet scelerisque. Phasellus quis suscipit neque."
             })
             {

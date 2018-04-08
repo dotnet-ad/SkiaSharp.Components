@@ -16,14 +16,14 @@ this.Title = new Label
 
 this.Separator = new View
 {
-    BackgroundColor = SKColors.Black,
+    BackgroundBrush = new ColorBrush(SKColors.Black),
     Frame = SKRect.Create(0,50,200,4),
 };
 
 this.Description = new Label
 {
     TextSize = 15,
-    BackgroundColor = SKColors.White,
+    BackgroundBrush = new ColorBrush(SKColors.White),
     CornerRadius = 50,
     ShadowSize = new SKSize(4,4),
     Text = "Nam ut imperdiet nibh. Ut sollicitudin varius nibh, id ornare tortor convallis sed. Morbi volutpat, lacus efficitur volutpat lacinia, nibh velit ultricies neque, vel faucibus tellus neque at nibh. Nullam vitae tincidunt metus. Vestibulum nec nisl quis lorem tincidunt maximus eu vel lectus. Proin posuere augue molestie imperdiet scelerisque. Phasellus quis suscipit neque.",
