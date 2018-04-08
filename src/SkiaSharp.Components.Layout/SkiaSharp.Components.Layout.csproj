@@ -8,7 +8,7 @@
     <ProjectReference Include="..\SkiaSharp.Components\SkiaSharp.Components.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Facebook.Yoga" Version="1.5.0-pre1" />
     <PackageReference Include="SkiaSharp" Version="1.59.2" />
+    <PackageReference Include="Facebook.Yoga" Version="1.5.0-pre1" />
   </ItemGroup>
 </Project>

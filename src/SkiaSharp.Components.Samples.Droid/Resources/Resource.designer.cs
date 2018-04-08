@@ -26,6 +26,7 @@ namespace SkiaSharp.Components.Samples.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::SkiaSharp.Components.Layout.Droid.Resource.String.library_name = global::SkiaSharp.Components.Samples.Droid.Resource.String.library_name;
 		}
 		
 		public partial class Animation
@@ -2275,8 +2276,11 @@ namespace SkiaSharp.Components.Samples.Droid
 			// aapt resource value: 0x7f050012
 			public const int abc_toolbar_collapse_description = 2131034130;
 			
+			// aapt resource value: 0x7f050022
+			public const int app_name = 2131034146;
+			
 			// aapt resource value: 0x7f050021
-			public const int app_name = 2131034145;
+			public const int library_name = 2131034145;
 			
 			// aapt resource value: 0x7f050013
 			public const int search_menu_title = 2131034131;
