@@ -26,6 +26,8 @@ namespace SkiaSharp.Components
 
         private bool isInvalidated;
 
+        private SKRect lastLayout;
+
         #endregion
 
         public virtual SKRect AbsoluteFrame
@@ -42,6 +44,18 @@ namespace SkiaSharp.Components
         public virtual void Layout(SKRect available)
         {
             this.LayoutFrame = available;
+        }
+
+        public virtual bool LayoutIfNeeded(SKRect available)
+        {
+            if(lastLayout != available)
+            {
+                this.Layout(available);
+                this.lastLayout = available;
+                return true;
+            }
+
+            return false;
         }
 
         public virtual void Render(SKCanvas canvas) {}

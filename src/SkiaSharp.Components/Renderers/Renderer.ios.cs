@@ -21,6 +21,8 @@ namespace SkiaSharp.Components
 
         private void OnViewInvalidated(object sender, EventArgs e)
         {
+            Components.Density.Global = (float)UIScreen.MainScreen.Scale;
+
             var newSize = new SKSize((float)this.Bounds.Size.Width, (float)this.Bounds.Size.Height);
             Debug.WriteLine("<OnViewInvalidated start>");
             if(this.size != newSize)

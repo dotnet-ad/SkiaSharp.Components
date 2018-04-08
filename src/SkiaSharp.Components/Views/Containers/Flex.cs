@@ -50,7 +50,7 @@ namespace SkiaSharp.Components
 
                 this.root.CalculateLayout();
 
-                this.ApplyLayout(this.root);
+                this.ApplyLayout(this.root, SKPoint.Empty);
             }
         }
 
@@ -80,16 +80,18 @@ namespace SkiaSharp.Components
             }
         }
 
-        private void ApplyLayout(YogaNode n)
+        private void ApplyLayout(YogaNode n, SKPoint origin)
         {
             if (n.Data is View view)
             {
-                view.Layout(SKRect.Create(n.LayoutX, n.LayoutY, n.LayoutWidth, n.LayoutHeight));
+                origin.X += n.LayoutX;
+                origin.Y += n.LayoutY;
+                view.LayoutIfNeeded(SKRect.Create(origin.X, origin.Y, n.LayoutWidth, n.LayoutHeight));
             }
 
             foreach (var child in n)
             {
-                this.ApplyLayout(child);
+                this.ApplyLayout(child, origin);
             }
         }
     }

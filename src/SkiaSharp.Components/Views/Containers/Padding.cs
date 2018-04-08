@@ -32,7 +32,7 @@ namespace SkiaSharp.Components
                 var height = Math.Max(0,available.Height - (this.Margin?.Top ?? 0) - (this.Margin?.Bottom ?? 0));
 
                 var inner = SKRect.Create(left, top, width, height);
-                this.Child.Layout(inner);
+                this.Child.LayoutIfNeeded(inner);
             }
         }
 

@@ -182,7 +182,7 @@ namespace SkiaSharp.Components
                 var location = cellSizes[position.Column, position.Row].Location;
                 var width = Enumerable.Range(position.Column, position.ColumnSpan).Sum(x => cellSizes[x, 0].Width);
                 var height = Enumerable.Range(position.Row, position.RowSpan).Sum(x => cellSizes[0, x].Height);
-                position.View.Layout(SKRect.Create(location, new SKSize(width,height)));
+                position.View.LayoutIfNeeded(SKRect.Create(location, new SKSize(width,height)));
             }
         }
 

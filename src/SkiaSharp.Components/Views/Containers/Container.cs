@@ -26,7 +26,6 @@ namespace SkiaSharp.Components
         public override void Layout(SKRect available)
         {
             base.Layout(available);
-
             this.LayoutChildren(this.LayoutFrame);
         }
 

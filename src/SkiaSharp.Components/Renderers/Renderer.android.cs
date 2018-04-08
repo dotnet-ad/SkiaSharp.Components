@@ -18,9 +18,17 @@ namespace SkiaSharp.Components
 
         private View view;
 
+
+        private SKRect size;
+
         private void OnViewInvalidated(object sender, EventArgs e)
         {
+            var displayMetrics = this.Context.Resources.DisplayMetrics;
+            Density.Global = displayMetrics.Density;
+
             Debug.WriteLine("<OnViewInvalidated start>");
+            Debug.WriteLine("Layout...");
+            this.view.Layout(this.size);
             this.Invalidate();
             Debug.WriteLine("<OnViewInvalidated end>");
         }
@@ -37,11 +45,8 @@ namespace SkiaSharp.Components
 
             if (w != oldw || h != oldh)
             {
-                Debug.WriteLine("<LayoutSubviews start>");
-                this.view.Layout(SKRect.Create(SKPoint.Empty, new SKSize(w, h)));
-                Debug.WriteLine("<LayoutSubviews end>");
+                this.size = SKRect.Create(SKPoint.Empty, new SKSize(w, h));
             }
-
         }
 
         #region Touches

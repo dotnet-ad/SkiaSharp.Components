@@ -11,12 +11,13 @@ namespace SkiaSharp.Components.Samples
             var row1 = new Flex.Node()
             {
                 FlexDirection = YogaFlexDirection.Row,
-                Height = 100,
+                Height = 140,
             };
 
             row1.AddChild(new Flex.Node(this.Icon)
             {
                 Width = 100,
+                Margin = 20.0f,
             });
 
             row1.AddChild(new Flex.Node(this.Title)
@@ -29,9 +30,10 @@ namespace SkiaSharp.Components.Samples
 
             var descNode = new Flex.Node(this.Description)
             {
+                Margin = 20,
                 AlignSelf = YogaAlign.Stretch,
-
             };
+
             descNode.SetMeasureFunction((n,w,wm,h,hm) => 
             {
                 var measured = Label.Measure(n.Data as Label, SKRect.Create(0, 0, w, h));
@@ -42,7 +44,15 @@ namespace SkiaSharp.Components.Samples
                 };
             });
 
-            root.AddChild(descNode);
+            var boxNode = new Flex.Node(this.Box)
+            {
+                Margin = 20,
+                Padding = 20,
+            };
+
+            boxNode.AddChild(descNode);
+
+            root.AddChild(boxNode);
 
             root.AddChild(new Flex.Node(this.Image)
             {
