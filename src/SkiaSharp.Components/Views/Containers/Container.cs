@@ -18,7 +18,7 @@ namespace SkiaSharp.Components
 
         public virtual void RemoveView(View subview)
         {
-            this.children.Add(subview);
+            this.children.Remove(subview);
             subview.Parent = null;
             this.Invalidate();
         }
